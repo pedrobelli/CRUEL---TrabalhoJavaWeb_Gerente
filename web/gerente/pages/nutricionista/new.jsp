@@ -10,18 +10,7 @@
   <main class="nutri">
     <div class="container row">
 
-      <div class="fixed-action-btn">
-        <a class="btn-floating btn-large blue">
-          <i class="large material-icons">menu</i>
-        </a>
-        <ul>
-          <li><a href="nutri\nutri_list.html" class="btn-floating blue lighten-2">NUT</a></li>
-          <li><a href="ger_aten.html" class="btn-floating blue lighten-2 ">ATE</a></li>
-          <li><a href="ger_geren.html" class="btn-floating blue lighten-2 ">GER</a></li>
-          <li><a href="ger_cat.html" class="btn-floating blue lighten-2 ">CAT</a></li>
-          <li><a href="index.html" class="btn-floating blue lighten-2 ">REL</a></li>
-        </ul>
-      </div>
+       <%@ include file="/gerente/pages/actionbutton.jsp"%>
 
 
       <h3 class="center">Nutricionistas</h3>
