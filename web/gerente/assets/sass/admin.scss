@@ -1,0 +1,69 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "index.scss";
+
+// MAIN
+main{
+  h3{
+    font-size: 20px;
+    color: #9e9e9e;
+    margin: 25px 0;
+  }
+  h4{
+    font-size: 16px;
+  }
+  .section{
+    display: inline-block;
+
+    .card-action{
+      background-color: white;
+      a{
+        color: blue;
+      }
+    }
+  }
+}
+
+
+ // NUTRICIONISTA
+ .nutri{
+
+   .nutri-list{
+     overflow: auto;
+     .nutri-item{
+       min-height: 30px;
+       margin: 20px 3px;
+       border-bottom: 1px solid gray;
+     }
+   }
+
+   form{
+     margin: 50px 0;
+
+   }
+   .search-nutri{
+
+     #search-nutri:focus{
+       background-color: transparent;
+       border-bottom: 1px solid #9e9e9e;
+       + label i{
+           font-size: 14px;
+       }
+     }
+
+     label{
+       i{
+         display: inline-block;
+         vertical-align: middle;
+       }
+       span{
+         display: inline-block;
+         vertical-align: middle;
+       }
+     }
+   }
+
+ }
