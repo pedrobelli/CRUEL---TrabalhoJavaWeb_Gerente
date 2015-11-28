@@ -1,0 +1,23 @@
+/*** Colors ***/
+$primary-color:  #039be5;
+$font-family-text: 'Alegreya Sans SC', sans-serif;
+$font-family-title: 'Sigmar One', cursive;
+
+$secondary-color: #00796b;
+$success-color: #4db6ac;
+$error-color: #bf360c;
+$link-color: #0091ea;
+
+/*** Global ***/
+// Media Query Ranges
+$small-screen-up: 601px;$medium-screen-up: 993px;
+$large-screen-up: 1201px;
+$small-screen: 600px;
+$medium-screen: 992px;
+$large-screen: 1200px;
+
+$medium-and-up: "only screen and (min-width : #{$small-screen-up})";
+$large-and-up: "only screen and (min-width : #{$medium-screen-up})";
+$small-and-down: "only screen and (max-width : #{$small-screen})";
+$medium-and-down: "only screen and (max-width : #{$medium-screen})";
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})";
