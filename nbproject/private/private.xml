@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/Layla/projetos/tads/CRUEL---TrabalhoJavaWeb_Gerente/web/gerente/pages/nutricionista/index.jsp</file>
+=======
             <file>file:/C:/Users/pedro/Documents/NetBeansProjects/CRUEL%20-%20TrabalhoJavaWeb_Gerente/src/java/models/Nutricionista.java</file>
             <file>file:/C:/Users/pedro/Documents/NetBeansProjects/CRUEL%20-%20TrabalhoJavaWeb_Gerente/src/java/models/Atendente.java</file>
             <file>file:/C:/Users/pedro/Documents/NetBeansProjects/CRUEL%20-%20TrabalhoJavaWeb_Gerente/src/java/models/Gerente.java</file>
+>>>>>>> 2772eccc175beae5f0391d441e3f78e6904e039a
         </group>
     </open-files>
 </project-private>
