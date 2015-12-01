@@ -1,4 +1,4 @@
-package models;
+package gerentes;
 
 import java.io.Serializable;
 

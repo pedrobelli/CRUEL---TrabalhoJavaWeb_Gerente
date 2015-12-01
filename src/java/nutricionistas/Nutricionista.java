@@ -1,11 +1,12 @@
-package models;
+package nutricionistas;
 
 import java.io.Serializable;
 
-public class Atendente implements Serializable {
+public class Nutricionista implements Serializable {
     private int    id;
     private String nome;
     private String cpf;
+    private String crn;
     private String email;
     private String senha;
     private int    tipoUsuario;
@@ -45,6 +46,14 @@ public class Atendente implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCrn() {
+        return crn;
+    }
+
+    public void setCrn(String crn) {
+        this.crn = crn;
     }
 
     public String getEmail() {
@@ -158,5 +167,5 @@ public class Atendente implements Serializable {
     public void setNumeroCelular(String numeroCelular) {
         this.numeroCelular = numeroCelular;
     }
-            
+    
 }

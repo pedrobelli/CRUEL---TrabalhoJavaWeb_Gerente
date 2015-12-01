@@ -1,4 +1,4 @@
-package models;
+package tipos_cliente;
 
 import java.io.Serializable;
 
