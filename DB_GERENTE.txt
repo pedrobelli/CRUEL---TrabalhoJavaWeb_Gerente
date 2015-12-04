@@ -1,0 +1,87 @@
+EXECUTAR NESTA ORDEM
+
+/*TABELA USUARIOS */
+CREATE TABLE usuarios(
+  email        VARCHAR(80),
+  senha        VARCHAR(255),
+  tipo_usuario INTEGER,
+  idDono       INTEGER,
+
+  PRIMARY KEY (email)
+)
+
+/*TABELA ATENDENTES */
+CREATE TABLE atendentes(
+  id   INTEGER,
+  nome VARCHAR(80),
+  cpf  VARCHAR(11),
+  /*Endereço*/
+  cep             VARCHAR(8),
+  estado          INTEGER,
+  cidade          VARCHAR(80),
+  bairro          VARCHAR(80),
+  rua             VARCHAR(80),
+  numero_endereco INTEGER,
+  complemento     VARCHAR(80),
+  /*Telefone*/
+  codigo_area_telefone INTEGER,
+  numero_telefone      VARCHAR(80),
+  codigo_area_celular  INTEGER,
+  numero_celular       VARCHAR(80),
+
+  PRIMARY KEY (id)
+)
+
+/*TABELA GERENTES */
+CREATE TABLE gerentes(
+  id   INTEGER,
+  nome VARCHAR(80),
+  cpf  VARCHAR(11),
+  /*Endereço*/
+  cep             VARCHAR(8),
+  estado          INTEGER,
+  cidade          VARCHAR(80),
+  bairro          VARCHAR(80),
+  rua             VARCHAR(80),
+  numero_endereco INTEGER,
+  complemento     VARCHAR(80),
+  /*Telefone*/
+  codigo_area_telefone INTEGER,
+  numero_telefone      VARCHAR(80),
+  codigo_area_celular  INTEGER,
+  numero_celular       VARCHAR(80),
+
+  PRIMARY KEY (id)
+)
+
+/*TABELA NUTRICIONISTAS */
+CREATE TABLE nutricionistas(
+  id   INTEGER,
+  nome VARCHAR(80),
+  cpf  VARCHAR(11),
+  crn  VARCHAR(20),
+  /*Endereço*/
+  cep             VARCHAR(8),
+  estado          INTEGER,
+  cidade          VARCHAR(80),
+  bairro          VARCHAR(80),
+  rua             VARCHAR(80),
+  numero_endereco INTEGER,
+  complemento     VARCHAR(80),
+  /*Telefone*/
+  codigo_area_telefone INTEGER,
+  numero_telefone      VARCHAR(80),
+  codigo_area_celular  INTEGER,
+  numero_celular       VARCHAR(80),
+
+  PRIMARY KEY (id)
+)
+
+/*TABELA TIPOS_CLIENTE */
+CREATE TABLE tipos_cliente(
+  id              INTEGER,
+  nome            VARCHAR(80),
+  valor_refeicao  DOUBLE,
+
+  PRIMARY KEY (id)
+)

@@ -6,16 +6,13 @@ public class Gerente implements Serializable {
     private int    id;
     private String nome;
     private String cpf;
-    private String email;
-    private String senha;
-    private int    tipoUsuario;
     //Endereço
-    private String zipCode;
+    private String cep;
     private int    estado;
     private String cidade;
     private String bairro;
     private String rua;
-    private String numeroEndereco;
+    private int    numeroEndereco;
     private String complemento;
     //Telefone
     private int    codigoAreaTelefone;
@@ -47,36 +44,12 @@ public class Gerente implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCep() {
+        return cep;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public int getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(int tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public int getEstado() {
@@ -111,11 +84,11 @@ public class Gerente implements Serializable {
         this.rua = rua;
     }
 
-    public String getNumeroEndereco() {
+    public int getNumeroEndereco() {
         return numeroEndereco;
     }
 
-    public void setNumeroEndereco(String numeroEndereco) {
+    public void setNumeroEndereco(int numeroEndereco) {
         this.numeroEndereco = numeroEndereco;
     }
 
