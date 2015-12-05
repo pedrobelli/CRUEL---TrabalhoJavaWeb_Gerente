@@ -12,7 +12,7 @@
         <h3 class="center">Tipos de Cliente</h3>
         <section>
             <div class="container">
-                <h4>Novo Tipo</h4>
+                <h4>Editar Tipo</h4>
                <form class="cadast" action="index.html" method="post">
                     <div class="input-field">
                         <label for="tipo-cli-name">Nome:</label>
@@ -33,4 +33,3 @@
     </div>
   </main>
 <%@ include file="/footer.jsp"%>
-
