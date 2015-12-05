@@ -8,14 +8,14 @@
 
       <%@ include file="/gerente/actionbutton.jsp"%>
 
-      <h3 class="center">Atendente</h3>
+      <h3 class="center">Gerente</h3>
       <section>
         <div class="container">
           <h4>Lista</h4>
           <form>
             <div class="input-field main-search" >
-              <input id="search-atendente" type="search" required>
-              <label for="search-atendente"><i class="material-icons">search</i><span>Buscar Atendente</span></label>
+              <input id="search-gerente" type="search" required>
+              <label for="search-gerente"><i class="material-icons">search</i><span>Buscar Gerente</span></label>
             </div>
           </form>
           <ul class="main-list">
