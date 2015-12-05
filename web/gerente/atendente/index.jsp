@@ -1,0 +1,42 @@
+<%-- 
+    Document   : index
+    Created on : 24/11/2015, 22:05:58
+    Author     : Layla
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ include file="/gerente/pages/header.jsp"%>
+
+    <main class="atendente">
+    <div class="container row">
+
+      <%@ include file="/gerente/pages/actionbutton.jsp"%>
+
+      <h3 class="center">Atendente</h3>
+      <section>
+        <div class="container">
+          <h4>Lista</h4>
+          <form>
+            <div class="input-field search-nutri" >
+              <input id="search-atendente" type="search" required>
+              <label for="search-nutri"><i class="material-icons">search</i><span>Buscar Atendente</span></label>
+            </div>
+          </form>
+          <ul class="atendente-list">
+            <li class="atendente-item">
+              <span>Nome Nutri</span>
+
+              <a href="#"> <i class="material-icons right">delete</i></a>
+             <a href="edit.html"> <i class="material-icons right">edit</i></a>
+            </li>
+            
+          </ul>
+          <a href="new.html" class="btn btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
+        </div>
+      </section>
+    </div>
+
+</main>
+    
+<%@ include file="/gerente/pages/footer.jsp"%>

@@ -15,7 +15,7 @@
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Sigmar+One|Alegreya+Sans+SC:400,300,700,400italic' rel='stylesheet' type='text/css'>
-        <link href="../../assets/stylesheets/admin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="../assets/stylesheets/admin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         <header>
