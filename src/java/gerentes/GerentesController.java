@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package atendentes;
+package gerentes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pedro
  */
-@WebServlet(name = "AtendentesController", urlPatterns = {"/atendentes"})
-public class AtendentesController extends HttpServlet {
+@WebServlet(name = "GerentesController", urlPatterns = {"/gerentes"})
+public class GerentesController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class AtendentesController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AtendenteController</title>");            
+            out.println("<title>Servlet GerentesController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AtendenteController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet GerentesController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
