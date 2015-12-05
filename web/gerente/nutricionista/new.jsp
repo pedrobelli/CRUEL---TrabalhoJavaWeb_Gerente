@@ -3,7 +3,6 @@
 <%@ include file="/header.jsp"%>
 
 <main class="main">
-
     <div class="container row">
 
         <%@ include file="/gerente/actionbutton.jsp"%>
@@ -12,7 +11,8 @@
         <section>
             <div class="container">
                 <h4>Novo Nutricionista</h4>
-               <form class="cadast" action="index.html" method="post">
+               <form class="cad-nutri" action="<%=url%>nutricionistas?action=create" method="post">
+
                     <div class="input-field">
                         <label for="nutri-name">Nome:</label>
                         <input type="text" name="nutri-name">
