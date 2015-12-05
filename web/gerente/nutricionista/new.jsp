@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 <%@ include file="/header.jsp"%>
-<main class="nutri">
+<main class="main">
 
     <div class="container row">
 
@@ -13,7 +13,7 @@
         <section>
             <div class="container">
                 <h4>Novo Nutricionista</h4>
-               <form class="cad-nutri" action="index.html" method="post">
+               <form class="cadast" action="index.html" method="post">
                     <div class="input-field">
                         <label for="nutri-name">Nome:</label>
                         <input type="text" name="nutri-name">

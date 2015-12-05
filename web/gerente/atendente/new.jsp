@@ -1,18 +1,19 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/header.jsp"%>  
-  <main class="main">
+
+<%@ include file="/header.jsp"%>
+<main class="main">
+
     <div class="container row">
 
        <%@ include file="/gerente/actionbutton.jsp"%>
 
 
-      <h3 class="center">Atendentes</h3>
-      <section>
-        <div class="container">
-          <h4>Editar Atendente</h4>
-          <form class="cadast" action="index.html" method="post">
+        <h3 class="center">Atendentes</h3>
+        <section>
+            <div class="container">
+                <h4>Novo Atendente</h4>
+               <form class="cadast" action="index.html" method="post">
                     <div class="input-field">
                         <label for="atendente-name">Nome:</label>
                         <input type="text" name="atendente-name">
@@ -57,8 +58,9 @@
                     </button>
                     <a class="waves-effect waves-teal btn-flat right">Cancelar</a>
                 </form>
-        </div>
-      </section>
+            </div>
+        </section>
     </div>
   </main>
 <%@ include file="/footer.jsp"%>
+

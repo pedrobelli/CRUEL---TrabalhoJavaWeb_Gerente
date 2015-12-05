@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>
 
-    <main class="atendente">
+    <main class="main">
     <div class="container row">
 
       <%@ include file="/gerente/actionbutton.jsp"%>

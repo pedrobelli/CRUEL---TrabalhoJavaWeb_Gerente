@@ -8,18 +8,18 @@
     <%@ include file="/gerente/actionbutton.jsp"%>
 
 
-    <h3 class="center">Nutricionistas</h3>
+    <h3 class="center">Tipos de Cliente</h3>
     <section>
         <div class="container">
             <form>
                 <div class="input-field main-search" >
-                    <input id="search-nutri" type="search" required>
-                    <label for="search-nutri"><i class="material-icons">search</i><span>Buscar Nutricionista</span></label>
+                    <input id="search-tipo-cliente" type="search" required>
+                    <label for="search-tipo-cliente"><i class="material-icons">search</i><span>Buscar Tipos de Cliente</span></label>
                 </div>
             </form>
             <ul class="main-list">
                 <li class="main-item">
-                   <span>Nome Nutri</span>
+                   <span>Tipo</span>
 
                    <a href="#"> <i class="material-icons right">delete</i></a>
                    <a href="#"> <i class="material-icons right">edit</i></a>
