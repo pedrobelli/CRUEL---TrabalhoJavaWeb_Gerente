@@ -5,8 +5,7 @@
 <main class="main">
     <div class="container row">
 
-    <%@ include file="/gerente/actionbutton.jsp"%>
-
+        <%@ include file="/gerente/actionbutton.jsp"%>
 
     <h3 class="center">Nutricionistas</h3>
     <section>
@@ -25,11 +24,10 @@
                    <a href="#"> <i class="material-icons right">edit</i></a>
                 </li>
             </ul>
-            <a href="new.html" class="btn btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
+            <a href="<%=url%>nutricionistas?action=new" class="btn btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
         </div>
       </section>
     </div>
-
 </main>
     
 <%@ include file="/footer.jsp"%>

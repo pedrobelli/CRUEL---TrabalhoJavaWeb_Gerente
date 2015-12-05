@@ -19,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "NutricionistaController", urlPatterns = {"/nutricionistas"})
 public class NutricionistaController extends HttpServlet {
+    
+    HttpServletRequest request;
+    HttpServletResponse response;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +37,36 @@ public class NutricionistaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            getServletContext().getRequestDispatcher("/gerente/nutricionista/edit.jsp").forward(request, response);
-
+            this.setRequest(request);
+            this.setResponse(response);
+            
+            String action = request.getParameter("action");
+            
+            if (action == null) {
+                getServletContext().getRequestDispatcher("/gerente/nutricionista/index.jsp").forward(request, response);
+            } else if (action.equals("new")) {
+                getServletContext().getRequestDispatcher("/gerente/nutricionista/new.jsp").forward(request, response);
+            }
+            
         } finally {
             out.close();
         }
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

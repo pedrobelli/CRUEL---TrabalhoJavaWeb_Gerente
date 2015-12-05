@@ -6,8 +6,6 @@
 
         <%@ include file="/gerente/actionbutton.jsp"%>
 
-
-
         <h3 class="center">Nutricionistas</h3>
         <section>
             <div class="container">

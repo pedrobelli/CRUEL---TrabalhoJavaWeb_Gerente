@@ -1,13 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <%@ include file="/header.jsp"%>
+
 <main class="main">
 
     <div class="container row">
 
-       <%@ include file="/gerente/actionbutton.jsp"%>
-
+        <%@ include file="/gerente/actionbutton.jsp"%>
 
         <h3 class="center">Nutricionistas</h3>
         <section>
@@ -59,10 +58,11 @@
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>
-                    <a class="waves-effect waves-teal btn-flat right">Cancelar</a>
+                    <a href="<%=url%>nutricionistas" class="waves-effect waves-teal btn-flat right">Cancelar</a>
                 </form>
             </div>
         </section>
     </div>
-  </main>
+</main>
+       
 <%@ include file="/footer.jsp"%>

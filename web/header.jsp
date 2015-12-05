@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% String url = getServletContext().getContextPath() + "/"; %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -9,7 +10,7 @@
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Sigmar+One|Alegreya+Sans+SC:400,300,700,400italic' rel='stylesheet' type='text/css'>
-        <link href="assets/stylesheets/admin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="<%=url%>assets/stylesheets/admin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         <% String loginUrl = "<a href='" + getServletContext().getContextPath() + "/login'>Login</a>" ; %>
