@@ -13,7 +13,7 @@
         <section>
             <div class="container">
                 <h4>Novo Nutricionista</h4>
-                <form class="cad-nutri" action="index.html" method="post">
+               <form class="cad-nutri" action="index.html" method="post">
                     <div class="input-field">
                         <label for="nutri-name">Nome:</label>
                         <input type="text" name="nutri-name">
@@ -27,11 +27,30 @@
                         <input type="text" name="nutri-crn">
                     </div>
                     <div class="input-field">
-
-                        <label for="nutri-address">Endereço</label>
-
-                        <input type="text" name="nutri-address">
+                        <label for="nutri-address_zip">Endereço</label>
+                        <input type="number" name="nutri-address_zip">
                     </div>
+                    <div class="input-field">
+                        <label for="nutri-address_street">Endereço</label>
+                        <input type="text" name="nutri-address_street">
+                    </div>
+                    <div class="input-field">
+                        <label for="nutri-address_number">Numero</label>
+                        <input type="number" name="nutri-address_number">
+                    </div>
+                    <div class="input-field">
+                        <label for="nutri-address_neighborhood">Bairro</label>
+                        <input type="text" name="nutri-address_neighborhood">
+                    </div>
+                    <div class="input-field">
+                        <label for="nutri-address_city">Cidade</label>
+                        <input type="text" name="nutri-address_city">
+                    </div>
+                    <div class="input-field">
+                        <label for="nutri-address_state">Estado</label>
+                        <input type="text" name="nutri-address_state">
+                    </div>
+                     
                     <div class="input-field">
                         <label for="nutri-email">Email:</label>
                         <input type="email" name="nutri-email">
