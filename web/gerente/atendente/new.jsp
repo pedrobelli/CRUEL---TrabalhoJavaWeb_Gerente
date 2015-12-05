@@ -13,7 +13,7 @@
         <section>
             <div class="container">
                 <h4>Novo Atendente</h4>
-               <form class="cadast" action="index.html" method="post">
+              <form class="cadast" action="index.html" method="post">
                     <div class="input-field">
                         <label for="atendente-name">Nome:</label>
                         <input type="text" name="atendente-name">
@@ -24,8 +24,8 @@
                     </div>
                     
                     <div class="input-field">
-                        <label for="atendente-address_zip">Endereço</label>
-                        <input type="number" name="atendente-address_zip">
+                        <label for="atendente-address_zip">CEP</label>
+                        <input type="text" name="atendente-address_zip">
                     </div>
                     <div class="input-field">
                         <label for="atendente-address_street">Endereço</label>
@@ -44,15 +44,23 @@
                         <input type="text" name="atendente-address_city">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_state">Estado</label>
-                        <input type="text" name="atendente-address_state">
+                        <select name="atendete-address_state">
+                            <option value="" disabled selected>Escolha seu Estado</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
                     </div>
+                    
                      
                     <div class="input-field">
                         <label for="atendente-email">Email:</label>
                         <input type="email" name="atendente-email">
                     </div>
-
+                    <div class="input-field">
+                        <label for="atendente-address_state">Telefone</label>
+                        <input type="text" name="atendente-address_state">
+                    </div>
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>
