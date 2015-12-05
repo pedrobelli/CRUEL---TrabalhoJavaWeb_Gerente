@@ -18,9 +18,8 @@
                 <ul class="nutri-list">
                     <li class="nutri-item">
                        <span>Nome Nutri</span>
-
                        <a href="#"> <i class="material-icons right">delete</i></a>
-                       <a href="edit.html"> <i class="material-icons right">edit</i></a>
+                       <a href="#"> <i class="material-icons right">edit</i></a>
                     </li>
                 </ul>
                 <a href="<%=url%>nutricionistas?action=new" class="btn btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
