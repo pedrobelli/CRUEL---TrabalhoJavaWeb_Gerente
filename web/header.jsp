@@ -18,12 +18,13 @@
         <link href="assets/stylesheets/admin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
+        <% String loginUrl = "<a href='" + getServletContext().getContextPath() + "/login'>Login</a>" ; %>
         <header>
             <nav>
               <div class="nav-wrapper">
                 <a href="index.html" class="brand-logo left">Gerencia</a>
                 <ul class="right">
-                  <li><a href="login.html">login</a></li>
+                  <li><%=loginUrl%></li>
                 </ul>
               </div>
             </nav>
