@@ -18,8 +18,8 @@
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-  <script src="../../assets/javascripts/bin/materialize.js"></script>
-  <script src="../../assets/javascripts/init.js"></script>
+  <script src="../assets/javascripts/bin/materialize.js"></script>
+  <script src="../assets/javascripts/init.js"></script>
 
   </body>
 </html>
