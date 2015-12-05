@@ -6,12 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/gerente/pages/header.jsp"%>
+<%@ include file="/header.jsp"%>
 
     <main class="nutri">
     <div class="container row">
 
-      <%@ include file="/gerente/pages/actionbutton.jsp"%>
+      <%@ include file="/gerente/actionbutton.jsp"%>
 
       <h3 class="center">Nutricionistas</h3>
       <section>
@@ -24,36 +24,15 @@
             </div>
           </form>
           <ul class="nutri-list">
+              <%-- 
+                foreach 
+              --%>
             <li class="nutri-item">
               <span>Nome Nutri</span>
 
               <a href="#"> <i class="material-icons right">delete</i></a>
              <a href="edit.html"> <i class="material-icons right">edit</i></a>
-            </li>
-            <li class="nutri-item">
-              <span>Nome Nutri</span>
-
-              <a href="#"> <i class="material-icons right">delete</i></a>
-              <a href="edit.html"> <i class="material-icons right">edit</i></a>
-            </li>
-            <li class="nutri-item">
-              <span>Nome Nutri</span>
-
-              <a href="#"> <i class="material-icons right">delete</i></a>
-             <a href="edit.html"> <i class="material-icons right">edit</i></a>
-            </li>
-            <li class="nutri-item">
-              <span>Nome Nutri</span>
-
-              <a href="#"> <i class="material-icons right">delete</i></a>
-             <a href="edit.html"> <i class="material-icons right">edit</i></a>
-            </li>
-            <li class="nutri-item">
-              <span>Nome Nutri</span>
-
-              <a href="#"> <i class="material-icons right">delete</i></a>
-             <a href="edit.html"> <i class="material-icons right">edit</i></a>
-            </li>
+            </li>            
           </ul>
           <a href="new.html" class="btn btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
         </div>
@@ -62,4 +41,4 @@
 
 </main>
     
-<%@ include file="/gerente/pages/footer.jsp"%>
+<%@ include file="/footer.jsp"%>

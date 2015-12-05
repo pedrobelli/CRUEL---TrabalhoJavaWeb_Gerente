@@ -1,17 +1,12 @@
-<%-- 
-    Document   : index
-    Created on : 24/11/2015, 22:05:58
-    Author     : Layla
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/gerente/pages/header.jsp"%>
+<%@ include file="/header.jsp"%>
 
     <main class="atendente">
     <div class="container row">
 
-      <%@ include file="/gerente/pages/actionbutton.jsp"%>
+      <%@ include file="/gerente/actionbutton.jsp"%>
 
       <h3 class="center">Atendente</h3>
       <section>
@@ -39,4 +34,4 @@
 
 </main>
     
-<%@ include file="/gerente/pages/footer.jsp"%>
+<%@ include file="/footer.jsp"%>

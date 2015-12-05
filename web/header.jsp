@@ -19,10 +19,11 @@
     </head>
     <body>
         <% String loginUrl = "<a href='" + getServletContext().getContextPath() + "/login'>Login</a>" ; %>
+        <% String relatoriosUrl = "<a class='brand-logo left' href='" + getServletContext().getContextPath() + "/relatorios'>Gerencia</a>" ; %>
         <header>
             <nav>
               <div class="nav-wrapper">
-                <a href="index.html" class="brand-logo left">Gerencia</a>
+                <%=relatoriosUrl%>
                 <ul class="right">
                   <li><%=loginUrl%></li>
                 </ul>

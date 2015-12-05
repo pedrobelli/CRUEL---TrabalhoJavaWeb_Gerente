@@ -6,11 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/gerente/pages/header.jsp"%>
+<%@ include file="/header.jsp"%>
   <main class="nutri">
     <div class="container row">
 
-       <%@ include file="/gerente/pages/actionbutton.jsp"%>
+       <%@ include file="/gerente/actionbutton.jsp"%>
 
 
       <h3 class="center">Nutricionistas</h3>
@@ -48,4 +48,4 @@
       </section>
     </div>
   </main>
-<%@ include file="/gerente/pages/footer.jsp"%>
+<%@ include file="/footer.jsp"%>
