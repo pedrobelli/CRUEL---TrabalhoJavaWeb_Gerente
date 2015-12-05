@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ include file="/header.jsp"%>  
 <main class="nutri">
     <div class="container row">
@@ -24,7 +26,9 @@
                         <input type="text" name="nutri-crn">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address">Endere?o</label>
+
+                        <label for="nutri-address">Endereço</label>
+
                         <input type="text" name="nutri-address">
                     </div>
                     <div class="input-field">
