@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package nutricionistas;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Layla
+ * @author pedro
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "NutricionistaController", urlPatterns = {"/nutricionistas"})
+public class NutricionistaController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +34,7 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            getServletContext().getRequestDispatcher("/gerente/login.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/gerente/nutricionista/edit.jsp").forward(request, response);
 
         } finally {
             out.close();

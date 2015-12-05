@@ -1,9 +1,3 @@
-<%-- 
-    Document   : header
-    Created on : 21/11/2015, 19:26:49
-    Author     : Layla
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

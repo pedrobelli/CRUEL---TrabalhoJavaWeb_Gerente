@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 24/11/2015, 22:35:38
-    Author     : Layla
---%>
-
 <%@ include file="/header.jsp"%>
 <main>
     <div class="container">
