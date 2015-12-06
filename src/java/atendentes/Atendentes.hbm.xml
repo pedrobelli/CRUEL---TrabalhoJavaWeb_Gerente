@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2015 18:15:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="atendentes.Atendente" table="atendentes" catalog="cruel_gerente" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="80" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="11" />
+        </property>
+        <property name="cep" type="string">
+            <column name="cep" length="8" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="estado" />
+        </property>
+        <property name="cidade" type="string">
+            <column name="cidade" length="80" />
+        </property>
+        <property name="bairro" type="string">
+            <column name="bairro" length="80" />
+        </property>
+        <property name="rua" type="string">
+            <column name="rua" length="80" />
+        </property>
+        <property name="numeroEndereco" type="java.lang.Integer">
+            <column name="numero_endereco" />
+        </property>
+        <property name="complemento" type="string">
+            <column name="complemento" length="80" />
+        </property>
+        <property name="codigoAreaTelefone" type="java.lang.Integer">
+            <column name="codigo_area_telefone" />
+        </property>
+        <property name="numeroTelefone" type="string">
+            <column name="numero_telefone" length="80" />
+        </property>
+        <property name="codigoAreaCelular" type="java.lang.Integer">
+            <column name="codigo_area_celular" />
+        </property>
+        <property name="numeroCelular" type="string">
+            <column name="numero_celular" length="80" />
+        </property>
+    </class>
+</hibernate-mapping>

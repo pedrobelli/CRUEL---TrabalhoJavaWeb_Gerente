@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2015 18:15:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="cruel_gerente" name="usuarios.Usuario" optimistic-lock="version" table="usuarios">
+    <id name="email" type="string">
+      <column length="80" name="email"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="senha" type="string">
+      <column name="senha"/>
+    </property>
+    <property name="tipoUsuario" type="java.lang.Integer">
+      <column name="tipo_usuario"/>
+    </property>
+    <property name="idDono" type="java.lang.Integer">
+      <column name="idDono"/>
+    </property>
+  </class>
+</hibernate-mapping>

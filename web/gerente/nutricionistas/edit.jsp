@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/header.jsp"%>
-
+<%@ include file="/header.jsp"%>  
 <main class="main">
     <div class="container row">
 
@@ -10,9 +9,10 @@
         <h3 class="center">Nutricionistas</h3>
         <section>
             <div class="container">
-                <h4>Novo Nutricionista</h4>
-               <form class="cad-nutri" action="<%=url%>nutricionistas?action=create" method="post">
-
+                <h4>Editar Nutricionista</h4>
+                <form class="cadast" action="#" method="post">
+                    <input type="hidden" name="id" value="" />
+                    
                     <div class="input-field">
                         <label for="nutri-name">Nome:</label>
                         <input type="text" name="nutri-name">
@@ -58,11 +58,11 @@
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>
-                    <a href="<%=url%>nutricionistas" class="waves-effect waves-teal btn-flat right">Cancelar</a>
+                    <a class="waves-effect waves-teal btn-flat right">Cancelar</a>
                 </form>
             </div>
         </section>
     </div>
 </main>
-       
+
 <%@ include file="/footer.jsp"%>
