@@ -14,45 +14,68 @@
                <form class="cadast" action="<%=url%>nutricionistas?action=create" method="post">
                       
                     <div class="input-field">
-                        <label for="nutri-name">Nome:</label>
+                        <label for="nome">Nome:</label>
                         <input type="text" name="nome">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-cpf">CPF:</label>
+                        <label for="cpf">CPF:</label>
                         <input type="text" name="cpf">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-crn">CRN:</label>
+                        <label for="crn">CRN:</label>
                         <input type="text" name="crn">
                     </div>
+                   
                     <div class="input-field">
-                        <label for="nutri-address_zip">CEP</label>
+                        <label for="cep">CEP</label>
                         <input type="text" name="cep">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address_street">Endereço</label>
+                        <label for="nrua">Endereço</label>
                         <input type="text" name="rua">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address_number">Numero</label>
+                        <label for="numeroEndereco">Numero</label>
                         <input type="number" name="numeroEndereco">
                     </div>
+                   <div class="input-field">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" name="complemento">
+                   </div>
                     <div class="input-field">
-                        <label for="nutri-address_neighborhood">Bairro</label>
+                        <label for="bairro">Bairro</label>
                         <input type="text" name="bairro">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address_city">Cidade</label>
+                        <label for="cidade">Cidade</label>
                         <input type="text" name="cidade">
                     </div>
-                    <div class="input-field">
-                        <label for="nutri-address_state">Estado</label>
-                        <input type="text" name="estado">
+                   <div class="input-field">
+                        <select name="estado">
+                            <option value="" disabled selected>Escolha seu Estado</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label for="estado">Estado</label>
                     </div>
+                   
+                    <div class="input-field">
+                        <label for="numeroTelefone">Telefone</label>
+                        <input type="text" name="numeroTelefone">
+                     </div>
+                    <div class="input-field">
+                        <label for="numeroCelular">Celular</label>
+                        <input type="text" name="numeroCelular">
+                     </div>
                      
                     <div class="input-field">
-                        <label for="nutri-email">Email:</label>
+                        <label for="email">Email:</label>
                         <input type="email" name="email">
+                    </div>
+                    <div class="input-field">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha">
                     </div>
 
                     <button class="btn blue right" type="submit" name="action">Ok

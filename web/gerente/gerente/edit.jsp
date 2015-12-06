@@ -8,39 +8,39 @@
        <%@ include file="/gerente/actionbutton.jsp"%>
 
 
-      <h3 class="center">Atendentes</h3>
+      <h3 class="center">Gerentes	</h3>
       <section>
         <div class="container">
-          <h4>Editar Atendente</h4>
+          <h4>Editar Gerente</h4>
           <form class="cadast" action="index.html" method="post">
                     <div class="input-field">
-                        <label for="atendente-name">Nome:</label>
-                        <input type="text" name="atendente-name">
+                        <label for="gerente-name">Nome:</label>
+                        <input type="text" name="gerente-name">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-cpf">CPF:</label>
-                        <input type="text" name="atendente-cpf">
+                        <label for="gerente-cpf">CPF:</label>
+                        <input type="text" name="gerente-cpf">
                     </div>
                     
                     <div class="input-field">
-                        <label for="atendente-address_zip">CEP</label>
-                        <input type="text" name="atendente-address_zip">
+                        <label for="gerente-address_zip">CEP</label>
+                        <input type="text" name="gerente-address_zip">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_street">Endereço</label>
-                        <input type="text" name="atendente-address_street">
+                        <label for="gerente-address_street">Endereço</label>
+                        <input type="text" name="gerente-address_street">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_number">Numero</label>
-                        <input type="number" name="atendente-address_number">
+                        <label for="gerente-address_number">Numero</label>
+                        <input type="number" name="gerente-address_number">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_neighborhood">Bairro</label>
-                        <input type="text" name="atendente-address_neighborhood">
+                        <label for="gerente-address_neighborhood">Bairro</label>
+                        <input type="text" name="gerente-address_neighborhood">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_city">Cidade</label>
-                        <input type="text" name="atendente-address_city">
+                        <label for="gerente-address_city">Cidade</label>
+                        <input type="text" name="gerente-address_city">
                     </div>
                     <div class="input-field">
                         <select name="atendete-address_state">
@@ -51,17 +51,19 @@
                         </select>
                     </div>
                     
+                     
                     <div class="input-field">
-                        <label for="atendente-address_state">Telefone</label>
-                        <input type="text" name="atendente-address_state">
-                    </div>                     
+                        <label for="gerente-address_state">Telefone</label>
+                        <input type="text" name="gerente-address_state">
+                    </div>
+                     
                     <div class="input-field">
-                        <label for="atendente-email">Email:</label>
-                        <input type="email" name="atendente-email">
+                        <label for="gerente-email">Email:</label>
+                        <input type="email" name="gerente-email">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-senha">Senha</label>
-                        <input type="password" name="atendente-senha">
+                        <label for="gerente-senha">Senha</label>
+                        <input type="password" name="gerente-seha">
                     </div>
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
