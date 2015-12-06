@@ -51,16 +51,19 @@
                             <option value="3">Option 3</option>
                         </select>
                     </div>
-                    
-                     
+                    <div class="input-field">
+                        <label for="atendente-address_state">Telefone</label>
+                        <input type="text" name="atendente-address_state">
+                    </div>                     
                     <div class="input-field">
                         <label for="atendente-email">Email:</label>
                         <input type="email" name="atendente-email">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_state">Telefone</label>
-                        <input type="text" name="atendente-address_state">
+                        <label for="atendente-senha">Senha</label>
+                        <input type="password" name="atendente-senha">
                     </div>
+                    
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>

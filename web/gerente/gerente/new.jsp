@@ -51,16 +51,20 @@
                             <option value="3">Option 3</option>
                         </select>
                     </div>
-                    
+                    <div class="input-field">
+                        <label for="gerente-address_state">Telefone</label>
+                        <input type="text" name="gerente-address_state">
+                    </div>
                      
                     <div class="input-field">
                         <label for="gerente-email">Email:</label>
                         <input type="email" name="gerente-email">
                     </div>
                     <div class="input-field">
-                        <label for="gerente-address_state">Telefone</label>
-                        <input type="text" name="gerente-address_state">
+                        <label for="gerente-senha">Senha</label>
+                        <input type="password" name="gerente-seha">
                     </div>
+                  
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>

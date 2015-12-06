@@ -57,16 +57,20 @@
                         </select>
                        <label for="nutri-address_state">Estado</label>
                     </div>
-                     
+                      <div class="input-field">
+                        <label for="nutri-address_number">Telefone</label>
+                        <input type="text" name="nutri-address_number">
+                     </div>
                      
                     <div class="input-field">
                         <label for="nutri-email">Email:</label>
                         <input type="email" name="nutri-email">
                     </div>
-                     <div class="input-field">
-                        <label for="nutri-address_number">Telefone</label>
-                        <input type="text" name="nutri-address_number">
-                     </div>
+                    <div class="input-field">
+                        <label for="nutri-email">Senha</label>
+                        <input type="password" name="nutri-email">
+                    </div>
+                    
 
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
