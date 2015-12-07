@@ -10,46 +10,46 @@
         <section>
             <div class="container">
                 <h4>Editar Nutricionista</h4>
-                <form class="cadast" action="#" method="post">
-                    <input type="hidden" name="id" value="" />
-                    
+                <form class="cadast" action="<%=url%>nutricionistas?action=edit" method="post">
+                      
                     <div class="input-field">
-                        <label for="nutri-name">Nome:</label>
-                        <input type="text" name="nutri-name">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-cpf">CPF:</label>
-                        <input type="text" name="nutri-cpf">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" name="cpf" class="federal-id">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-crn">CRN:</label>
-                        <input type="text" name="nutri-crn">
+                        <label for="crn">CRN:</label>
+                        <input type="text" name="crn">
+                    </div>
+                   
+                    <div class="input-field">
+                        <label for="cep">CEP</label>
+                        <input type="text" name="cep" class="zip-code">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address_zip">CEP</label>
-                        <input type="text" name="nutri-address_zip">
+                        <label for="nrua">Endereço</label>
+                        <input type="text" name="rua">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address_street">Endereço</label>
-                        <input type="text" name="nutri-address_street">
-                    </div>
-                    <div class="input-field">
-                        <label for="nutri-address_number">Numero</label>
-                        <input type="number" name="nutri-address_number">
+                        <label for="numeroEndereco">Numero</label>
+                        <input type="number" name="numeroEndereco">
                     </div>
                    <div class="input-field">
-                        <label for="nutri-address_number">Complemento</label>
-                        <input type="text" name="nutri-address_number">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" name="complemento">
                    </div>
                     <div class="input-field">
-                        <label for="nutri-address_neighborhood">Bairro</label>
-                        <input type="text" name="nutri-address_neighborhood">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" name="bairro">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-address_city">Cidade</label>
-                        <input type="text" name="nutri-address_city">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" name="cidade">
                     </div>
-                    
+                   <div>
                    <div class="input-field">
                         <select name="estado" class="browser-default">
                            <option value="" disabled selected>Estado</option>
@@ -58,20 +58,25 @@
                            <option value="3">Option 3</option>
                          </select>
                     </div>
-                      <div class="input-field">
-                        <label for="nutri-address_number">Telefone</label>
-                        <input type="text" name="nutri-address_number">
+                   </div>
+                   
+                    <div class="input-field">
+                        <label for="numeroTelefone">Telefone</label>
+                        <input type="text" name="numeroTelefone" class ="cellphones">
+                     </div>
+                    <div class="input-field">
+                        <label for="numeroCelular">Celular</label>
+                        <input type="text" name="numeroCelular" class ="cellphones">
                      </div>
                      
                     <div class="input-field">
-                        <label for="nutri-email">Email:</label>
-                        <input type="email" name="nutri-email">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email">
                     </div>
                     <div class="input-field">
-                        <label for="nutri-email">Senha</label>
-                        <input type="password" name="nutri-email">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha">
                     </div>
-                    
 
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>

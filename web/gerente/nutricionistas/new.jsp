@@ -19,7 +19,7 @@
                     </div>
                     <div class="input-field">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf">
+                        <input type="text" name="cpf" class="federal-id">
                     </div>
                     <div class="input-field">
                         <label for="crn">CRN:</label>
@@ -28,7 +28,7 @@
                    
                     <div class="input-field">
                         <label for="cep">CEP</label>
-                        <input type="text" name="cep">
+                        <input type="text" name="cep" class="zip-code">
                     </div>
                     <div class="input-field">
                         <label for="nrua">Endereço</label>
@@ -63,11 +63,11 @@
                    
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
-                        <input type="text" name="numeroTelefone">
+                        <input type="text" name="numeroTelefone" class ="cellphones">
                      </div>
                     <div class="input-field">
                         <label for="numeroCelular">Celular</label>
-                        <input type="text" name="numeroCelular">
+                        <input type="text" name="numeroCelular" class ="cellphones">
                      </div>
                      
                     <div class="input-field">

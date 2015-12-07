@@ -14,6 +14,9 @@
                 <div class="input-field main-search" >
                     <input id="search-nutri" type="search" required>
                     <label for="search-nutri"><i class="material-icons">search</i><span>Buscar Nutricionista</span></label>
+                    <button class="btn waves-effect waves-light blue right" type="submit" name="action">Buscar
+                        <i class="material-icons right">search</i>
+                    </button>
                 </div>
             </form>
             <ul class="main-list">
