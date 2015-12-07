@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="nutricionistas.Nutricionista"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>
 
@@ -20,12 +22,24 @@
                 </div>
             </form>
             <ul class="main-list">
-                <li class="main-item">
-                   <span>Nome Nutri</span>
+                <%        
+                    List<Nutricionista> nutricionistas = (List) request.getAttribute("nutricionistas");
+                    if(nutricionistas.size()>=0){
+                        int index;
+                        for(index=0; index < nutricionistas.size(); index++){                   
+                            Nutricionista nutricionista = nutricionistas.get(index);
+                            String htmlBody ="<li class='main-item'>";
+                            htmlBody+="<span>" + nutricionista.getNome() + " - " + nutricionista.getCpf()+ "</span>";
+                            htmlBody+="<a href='#'> <i class='material-icons right'>delete</i></a>";
+                            htmlBody+="<a href='#'> <i class='material-icons right'>edit</i></a></li>";
 
-                   <a href="#"> <i class="material-icons right">delete</i></a>
-                   <a href="#"> <i class="material-icons right">edit</i></a>
-                </li>
+                            out.println(htmlBody);
+                        }
+                    }
+                    else{
+                        out.println("Nao existem Atividades cadastrados.");
+                    }
+                %>
             </ul>
             <a href="<%=url%>nutricionistas?action=new" class="btn btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
         </div>

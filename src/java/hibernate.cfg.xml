@@ -7,6 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cruel_gerente</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">102030</property>
+    <property name="hibernate.show_sql">true</property>
     <mapping resource="gerentes/Gerentes.hbm.xml"/>
     <mapping resource="usuarios/Usuarios.hbm.xml"/>
     <mapping resource="nutricionistas/Nutricionistas.hbm.xml"/>
