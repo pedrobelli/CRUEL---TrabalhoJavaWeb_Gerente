@@ -23,7 +23,8 @@
                     </div>
                     <div class="input-field">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf" value="${nutricionista.cpf}">
+                        <input type="text" name="cpf" class="federal-id" value="${nutricionista.cpf}">
+
                     </div>
                     <div class="input-field">
                         <label for="crn">CRN:</label>
@@ -32,7 +33,8 @@
                    
                     <div class="input-field">
                         <label for="cep">CEP</label>
-                        <input type="text" name="cep" value="${nutricionista.cep}">
+                        <input type="text" name="cep" class="zip-code" value="${nutricionista.cep}">
+
                     </div>
                     <div class="input-field">
                         <label for="nrua">Endereço</label>
@@ -67,11 +69,13 @@
                    
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
-                        <input type="text" name="numeroTelefone" value="${nutricionista.numeroTelefone}">
+
+                        <input type="text" name="numeroTelefone" class ="cellphones" value="${nutricionista.numeroTelefone}">
                      </div>
                     <div class="input-field">
                         <label for="numeroCelular">Celular</label>
-                        <input type="text" name="numeroCelular" value="${nutricionista.numeroCelular}">
+                        <input type="text" name="numeroCelular" class ="cellphones" value="${nutricionista.numeroCelular}">
+
                      </div>
                      
                     <div class="input-field">

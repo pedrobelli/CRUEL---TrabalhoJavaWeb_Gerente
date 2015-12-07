@@ -15,6 +15,9 @@
                 <div class="input-field main-search" >
                     <input id="search-tipo-cliente" type="search" required>
                     <label for="search-tipo-cliente"><i class="material-icons">search</i><span>Buscar Tipos de Cliente</span></label>
+                    <button class="btn waves-effect waves-light blue right" type="submit" name="action">Buscar
+                        <i class="material-icons right">search</i>
+                      </button>
                 </div>
             </form>
             <ul class="main-list">

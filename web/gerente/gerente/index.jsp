@@ -16,6 +16,9 @@
             <div class="input-field main-search" >
               <input id="search-gerente" type="search" required>
               <label for="search-gerente"><i class="material-icons">search</i><span>Buscar Gerente</span></label>
+              <button class="btn waves-effect waves-light blue right" type="submit" name="action">Buscar
+                <i class="material-icons right">search</i>
+              </button>
             </div>
           </form>
           <ul class="main-list">
