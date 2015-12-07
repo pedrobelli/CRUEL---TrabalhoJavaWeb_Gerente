@@ -57,8 +57,7 @@ public class NutricionistaController extends HttpServlet {
             
             if (action == null) {
                 
-                request.setAttribute("nutricionistas", this.all());
-                
+                request.setAttribute("nutricionistas", this.all()); 
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
           
             } else if (action.equals("new")) {
@@ -73,6 +72,7 @@ public class NutricionistaController extends HttpServlet {
                 Nutricionista nutricionista = this.processRequest(request);
                 this.create(nutricionista);
                 
+                request.setAttribute("nutricionistas", this.all());
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
                 
             } else if (action.equals("delete")) {
@@ -83,8 +83,8 @@ public class NutricionistaController extends HttpServlet {
                 this.delete(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
-
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+            
             }
             
         } finally {
