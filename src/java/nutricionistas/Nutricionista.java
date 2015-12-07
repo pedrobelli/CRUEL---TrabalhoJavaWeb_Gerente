@@ -41,6 +41,14 @@ public class Nutricionista implements Serializable {
         return cpf;
     }
 
+    public String getFormatedCpf() {
+        String formatedCpf = cpf.substring(0, 3) + ".";
+        formatedCpf += cpf.substring(3, 6) + ".";
+        formatedCpf += cpf.substring(6, 9) + "-";
+        formatedCpf += cpf.substring(9);
+        return formatedCpf;
+    }
+
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }

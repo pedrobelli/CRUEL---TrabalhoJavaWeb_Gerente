@@ -8,23 +8,29 @@ import org.hibernate.Transaction;
 
 public class DaoNutricionista {
     
-    public Object create(Nutricionista nutricionista) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
-        session.save(nutricionista);
-        tx.commit();
-
-        return nutricionista;
-    }
-    
-    public List all(){
+    public List all() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         Query query = session.createSQLQuery("SELECT * FROM Nutricionistas").addEntity(Nutricionista.class);        
         List nutricionistas = query.list();
         
         return  nutricionistas;
+    }
+    
+    public void create(Nutricionista nutricionista) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        session.save(nutricionista);
+        tx.commit();
+    }
+    
+    public void delete(Nutricionista nutricionista) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        session.delete(nutricionista);
+        tx.commit();
     }
     
 }
