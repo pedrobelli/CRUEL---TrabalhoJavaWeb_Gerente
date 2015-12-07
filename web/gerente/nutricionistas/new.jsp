@@ -23,36 +23,36 @@
                     </div>
                     <div class="input-field">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf">
+                        <input type="text" name="cpf" value="${nutricionista.cpf}">
                     </div>
                     <div class="input-field">
                         <label for="crn">CRN:</label>
-                        <input type="text" name="crn">
+                        <input type="text" name="crn" value="${nutricionista.crn}">
                     </div>
                    
                     <div class="input-field">
                         <label for="cep">CEP</label>
-                        <input type="text" name="cep">
+                        <input type="text" name="cep" value="${nutricionista.cep}">
                     </div>
                     <div class="input-field">
                         <label for="nrua">Endereço</label>
-                        <input type="text" name="rua">
+                        <input type="text" name="rua" value="${nutricionista.rua}">
                     </div>
                     <div class="input-field">
                         <label for="numeroEndereco">Numero</label>
-                        <input type="number" name="numeroEndereco">
+                        <input type="number" name="numeroEndereco" value="${nutricionista.numeroEndereco}">
                     </div>
                    <div class="input-field">
                         <label for="complemento">Complemento</label>
-                        <input type="text" name="complemento">
+                        <input type="text" name="complemento" value="${nutricionista.complemento}">
                    </div>
                     <div class="input-field">
                         <label for="bairro">Bairro</label>
-                        <input type="text" name="bairro">
+                        <input type="text" name="bairro" value="${nutricionista.bairro}">
                     </div>
                     <div class="input-field">
                         <label for="cidade">Cidade</label>
-                        <input type="text" name="cidade">
+                        <input type="text" name="cidade" value="${nutricionista.cidade}">
                     </div>
                    <div>
                    <div class="input-field">
@@ -67,11 +67,11 @@
                    
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
-                        <input type="text" name="numeroTelefone">
+                        <input type="text" name="numeroTelefone" value="${nutricionista.numeroTelefone}">
                      </div>
                     <div class="input-field">
                         <label for="numeroCelular">Celular</label>
-                        <input type="text" name="numeroCelular">
+                        <input type="text" name="numeroCelular" value="${nutricionista.numeroCelular}">
                      </div>
                      
                     <div class="input-field">

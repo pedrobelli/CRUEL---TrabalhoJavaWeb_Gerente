@@ -43,6 +43,7 @@ public class NutricionistaController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
@@ -55,19 +56,39 @@ public class NutricionistaController extends HttpServlet {
             String action = request.getParameter("action");
             
             if (action == null) {
+                
+                request.setAttribute("nutricionistas", this.all());
+                
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+          
             } else if (action.equals("new")) {
+                
+                request.setAttribute("nutricionista", new Nutricionista());
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
+                
             } else if (action.equals("create")) {
+                
                 this.validate(request, response);
+                
                 Nutricionista nutricionista = this.processRequest(request);
                 this.create(nutricionista);
+                
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+                
             }
             
         } finally {
             out.close();
         }
+    }
+    
+    public List<Nutricionista> all() throws SQLException {
+        List<Nutricionista> nutricionistas = new ArrayList<Nutricionista>();
+        
+        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        nutricionistas = (List) daoNutricionista.all();
+        
+        return nutricionistas;
     }
     
     public void create(Nutricionista nutricionista) throws SQLException {
@@ -103,19 +124,19 @@ public class NutricionistaController extends HttpServlet {
             
             String numeroTelefone = request.getParameter("numeroTelefone");
             if (numeroTelefone.length() > 0) {
-                if (numeroTelefone.length() < 11) {
-                    errors.add("O campo telefone deve conter no mínimo 11 digitos;");
-                } else if (numeroTelefone.length() > 12) {
-                    errors.add("O campo telefone não pode conter mais de 12 digitos;");
+                if (numeroTelefone.length() < 10) {
+                    errors.add("O campo telefone deve conter no mínimo 10 digitos;");
+                } else if (numeroTelefone.length() > 11) {
+                    errors.add("O campo telefone não pode conter mais de 11 digitos;");
                 }
             }
             
             String numeroCelular = request.getParameter("numeroCelular");
             if (numeroCelular.length() > 0) {
-                if (numeroCelular.length() < 11) {
-                    errors.add("O campo celular deve conter no mínimo 11 digitos;");
-                } else if (numeroCelular.length() > 12) {
-                    errors.add("O campo celular não pode conter mais de 12 digitos;");
+                if (numeroCelular.length() < 10) {
+                    errors.add("O campo celular deve conter no mínimo 10 digitos;");
+                } else if (numeroCelular.length() > 11) {
+                    errors.add("O campo celular não pode conter mais de 11 digitos;");
                 }
             }
 
@@ -160,16 +181,16 @@ public class NutricionistaController extends HttpServlet {
         
         nutri.setComplemento(request.getParameter("complemento"));
         //Telefone
-        if (request.getParameter("numeroEndereco").length() > 0) {
-            String telefone = request.getParameter("numeroEndereco");
-            nutri.setCodigoAreaCelular(Integer.parseInt(telefone.substring(0, 3)));
-            nutri.setNumeroTelefone(telefone.substring(3));
+        if (request.getParameter("numeroTelefone").length() > 0) {
+            String telefone = request.getParameter("numeroTelefone");
+            nutri.setCodigoAreaTelefone(Integer.parseInt(telefone.substring(0, 2)));
+            nutri.setNumeroTelefone(telefone.substring(2));
         }
         
-        if (request.getParameter("numeroEndereco").length() > 0) {
+        if (request.getParameter("numeroCelular").length() > 0) {
             String celular = request.getParameter("numeroCelular");
-            nutri.setCodigoAreaCelular(Integer.parseInt(celular.substring(0, 3)));
-            nutri.setNumeroTelefone(celular.substring(3));
+            nutri.setCodigoAreaCelular(Integer.parseInt(celular.substring(0, 2)));
+            nutri.setNumeroCelular(celular.substring(2));
         }
 
         return nutri;
@@ -202,8 +223,8 @@ public class NutricionistaController extends HttpServlet {
         
         nutri.setComplemento(request.getParameter("complemento"));
         //Telefone
-        nutri.setNumeroTelefone(request.getParameter("numeroEndereco"));
-        nutri.setNumeroTelefone(request.getParameter("numeroCelular"));
+        nutri.setNumeroTelefone(request.getParameter("numeroTelefone"));
+        nutri.setNumeroCelular(request.getParameter("numeroCelular"));
 
         return nutri;
     }
