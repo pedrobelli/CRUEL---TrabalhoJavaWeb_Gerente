@@ -51,13 +51,12 @@
                     </div>
                     
                    <div class="input-field">
-                        <select name="nutri-address_state">
-                            <option value="" disabled selected>Escolha seu Estado</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
-                       <label for="nutri-address_state">Estado</label>
+                        <select name="estado" class="browser-default">
+                           <option value="" disabled selected>Estado</option>
+                           <option value="1">Option 1</option>
+                           <option value="2">Option 2</option>
+                           <option value="3">Option 3</option>
+                         </select>
                     </div>
                       <div class="input-field">
                         <label for="nutri-address_number">Telefone</label>
