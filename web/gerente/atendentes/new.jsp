@@ -1,7 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="atendentes.Atendente"%>
+<%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
 
 <%@ include file="/header.jsp"%>
+<% Atendente atendente = (Atendente) request.getAttribute("atendente"); %>
 <main class="main">
 
     <div class="container row">
@@ -13,61 +16,79 @@
         <section>
             <div class="container">
                 <h4>Novo Atendente</h4>
-              <form class="cadast" action="index.html" method="post">
+                <%@ include file="/errors.jsp"%>
+                
+              <form class="cadast" action="<%=url%>atendentes" method="post">
+                  <input type="hidden" name="action" value="create">
                     <div class="input-field">
-                        <label for="atendente-name">Nome:</label>
-                        <input type="text" name="atendente-name">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" value="${atendente.nome}">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-cpf">CPF:</label>
-                        <input type="text" name="atendente-cpf">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" name="cpf" value="${atendente.cpf}">
                     </div>
                     
                     <div class="input-field">
-                        <label for="atendente-address_zip">CEP</label>
-                        <input type="text" name="atendente-address_zip">
+                        <label for="cep">CEP</label>
+                        <input type="text" name="cep" value="${atendente.cep}">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_street">Endereço</label>
-                        <input type="text" name="atendente-address_street">
+                        <label for="rua">Endereço</label>
+                        <input type="text" name="rua" value="${atendente.rua}">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_number">Numero</label>
-                        <input type="number" name="atendente-address_number">
+                        <label for="numeroEndereco">Numero</label>
+                        <input type="number" name="numeroEndereco" value="${atendente.numeroEndereco}">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_neighborhood">Bairro</label>
-                        <input type="text" name="atendente-address_neighborhood">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" name="bairro" value="${atendente.bairro}">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_city">Cidade</label>
-                        <input type="text" name="atendente-address_city">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" name="cidade" value="${atendente.cidade}">
                     </div>
                     <div class="input-field">
-                        <select name="estado" class="browser-default">
-                           <option value="" disabled selected>Estado</option>
-                           <option value="1">Option 1</option>
-                           <option value="2">Option 2</option>
-                           <option value="3">Option 3</option>
-                         </select>
+                        <select name="estado" class="browser-default" value="">
+                            <option value="" disabled selected>Estados</option>
+                            <%
+                                for(Estado estado : Estado.values()){ 
+                                    if (estado.getCod() == nutricionista.getEstado()) {
+                                        out.println("<option value='" + estado.getCod() + "' selected>" + estado.getNome() + "</option>");
+                                    } else {
+                                        out.println("<option value='" + estado.getCod() + "'>" + estado.getNome() + "</option>");
+                                    }
+
+                                }
+                            %>
+                        </select>
                     </div>
                     <div class="input-field">
-                        <label for="atendente-address_state">Telefone</label>
-                        <input type="text" name="atendente-address_state">
+                        <label for="numeroTelefone">Telefone</label>
+                        <input type="text" name="numeroTelefone" value="${atendente.numeroTelefone}">
+                    </div>
+					<div class="input-field">
+                        <label for="numeroCelular">Celular</label>
+                        <input type="text" name="numeroCelular" value="${atendente.numeroCelular}">
                     </div>                     
                     <div class="input-field">
-                        <label for="atendente-email">Email:</label>
-                        <input type="email" name="atendente-email">
+                        <label for="email">Email</label>
+                        <input type="email" name="email">
                     </div>
                     <div class="input-field">
-                        <label for="atendente-senha">Senha</label>
-                        <input type="password" name="atendente-senha">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="senha">
+                    </div>
+                    <div class="input-field">
+                        <label for="confirmSenha">Confirma Senha</label>
+                        <input type="password" name="confirmSenha">
                     </div>
                     
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>
-                    <a class="waves-effect waves-teal btn-flat right">Cancelar</a>
+                    <a href="<%=url%>atendentes" class="waves-effect waves-teal btn-flat right">Cancelar</a>
                 </form>
             </div>
         </section>

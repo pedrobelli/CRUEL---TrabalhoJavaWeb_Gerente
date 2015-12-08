@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "NutricionistaController", urlPatterns = {"/nutricionistas"})
-public class NutricionistaController extends HttpServlet {
+@WebServlet(name = "NutricionistasController", urlPatterns = {"/nutricionistas"})
+public class NutricionistasController extends HttpServlet {
     
     HttpServletRequest request;
     HttpServletResponse response;
@@ -80,7 +80,7 @@ public class NutricionistaController extends HttpServlet {
                 
                 this.validate(request, response);
                 
-                Nutricionista nutricionista = this.processRequest(request);
+                Nutricionista nutricionista = this.processRequestForm(request);
                 this.create(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
@@ -97,7 +97,7 @@ public class NutricionistaController extends HttpServlet {
                 
                 this.validate(request, response);
                 
-                Nutricionista nutricionista = this.processRequest(request);
+                Nutricionista nutricionista = this.processRequestForm(request);
                 this.update(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
@@ -214,7 +214,7 @@ public class NutricionistaController extends HttpServlet {
         }    
     }
     
-    private Nutricionista processRequest(HttpServletRequest request) {
+    private Nutricionista processRequestForm(HttpServletRequest request) {
         Nutricionista nutri = new Nutricionista();
         
         if (request.getParameter("id") != null) {
@@ -304,9 +304,9 @@ public class NutricionistaController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -324,9 +324,9 @@ public class NutricionistaController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

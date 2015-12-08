@@ -39,7 +39,7 @@
 
                     </div>
                     <div class="input-field">
-                        <label for="nrua">Endereço</label>
+                        <label for="rua">Endereço</label>
                         <input type="text" name="rua" value="${nutricionista.rua}">
                     </div>
                     <div class="input-field">
@@ -87,12 +87,16 @@
                     </div>
                      
                     <div class="input-field">
-                        <label for="email">Email:</label>
+                        <label for="email">Email</label>
                         <input type="email" name="email">
                     </div>
                     <div class="input-field">
                         <label for="senha">Senha</label>
                         <input type="password" name="senha">
+                    </div>
+                    <div class="input-field">
+                        <label for="confirmSenha">Confirma Senha</label>
+                        <input type="password" name="confirmSenha">
                     </div>
 
                     <button class="btn blue right" type="submit" name="action">Ok
