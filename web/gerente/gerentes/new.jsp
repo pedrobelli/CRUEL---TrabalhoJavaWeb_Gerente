@@ -3,13 +3,13 @@
 <%@page import="usuarios.Usuario"%>
 <%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
-
 <%@ include file="/header.jsp"%>
 
 <% 
     Gerente gerente = (Gerente) request.getAttribute("gerente"); 
     Usuario usuario = (Usuario) request.getAttribute("usuario"); 
 %>
+
 <main class="main">
     <div class="container row">
         
@@ -108,5 +108,5 @@
         </section>
     </div>
 </main>
+       
 <%@ include file="/footer.jsp"%>
-

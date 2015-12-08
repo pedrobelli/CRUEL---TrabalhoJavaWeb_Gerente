@@ -120,7 +120,7 @@ public class NutricionistasController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
                 
             } else if (action.equals("edit")) {
-                DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+                DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
                 
                 request.setAttribute("nutricionista", daoNutricionista.get(id));
@@ -170,7 +170,7 @@ public class NutricionistasController extends HttpServlet {
     public List<Nutricionista> all() throws SQLException {
         List<Nutricionista> nutricionistas = new ArrayList<Nutricionista>();
         
-        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
         nutricionistas = (List) daoNutricionista.all(this.getSession());
         
         return nutricionistas;
@@ -179,32 +179,32 @@ public class NutricionistasController extends HttpServlet {
     public List<Nutricionista> search(String searchQuery) throws SQLException {
         List<Nutricionista> nutricionistas = new ArrayList<Nutricionista>();
         
-        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
         nutricionistas = (List) daoNutricionista.search(searchQuery);
         
         return nutricionistas;
     }
     
     public void create(Nutricionista nutricionista) throws SQLException {
-        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
         daoNutricionista.create(nutricionista);
     }
     
     public void createUsuario(Usuario usuario, int idDono) throws SQLException {
         usuario.setTipoUsuario(TipoUsuario.NUTRICIONISTA.getCod());
         usuario.setIdDono(idDono);
-        Usuario.create(usuario, this.getSession(), this.getTransaction());
+        Usuario.create(usuario, this.getSession());
         
     }
     
     public void update(Nutricionista nutricionista) throws SQLException {
-        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
         daoNutricionista.update(nutricionista);
     }
     
     public void delete(Nutricionista nutricionista) throws SQLException {
-        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
-        Usuario.delete(nutricionista.getId(), this.getSession(), this.getTransaction());
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
+        Usuario.delete(nutricionista.getId(), this.getSession());
         daoNutricionista.delete(nutricionista);
     }
     
@@ -220,7 +220,7 @@ public class NutricionistasController extends HttpServlet {
             errors.add("O campo cpf deve ser preenchido;");
         } else {
             String cpf = request.getParameter("cpf");
-            DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+            DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession());
         
             if (daoNutricionista.checkExistance(cpf)) {
                 errors.add("Já existe um nutricionista cadastrado com este cpf;");
@@ -266,7 +266,7 @@ public class NutricionistasController extends HttpServlet {
         if (email.length() < 1) {
             errors.add("O campo email deve ser preenchido;");
         } else {
-        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession(), this.getTransaction());;
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());;
             
             if (daoUsuario.checkExistance(email)) {
                 errors.add("Já existe um usuário cadastrado com este email;");

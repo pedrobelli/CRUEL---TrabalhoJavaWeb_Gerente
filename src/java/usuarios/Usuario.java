@@ -70,18 +70,18 @@ public class Usuario implements Serializable {
         return usu;
     }
     
-    public static void create(Usuario usuario, Session session, Transaction transaction) throws SQLException {
-        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session, transaction);
+    public static void create(Usuario usuario, Session session) throws SQLException {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session);
         daoUsuario.create(usuario);
     }
     
-    public static void update(Usuario usuario, Session session, Transaction transaction) throws SQLException {
-        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session, transaction);
+    public static void update(Usuario usuario, Session session) throws SQLException {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session);
         daoUsuario.update(usuario);
     }
     
-    public static void delete(int idDono, Session session, Transaction transaction) throws SQLException {
-        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session, transaction);
+    public static void delete(int idDono, Session session) throws SQLException {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session);
         Usuario usuario = (Usuario) daoUsuario.getByOwner(idDono);
         daoUsuario.delete(usuario);
     }

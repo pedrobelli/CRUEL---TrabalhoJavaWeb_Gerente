@@ -8,11 +8,9 @@ import utils.HibernateUtil;
 
 public class DaoUsuario {   
     private Session session;
-    private Transaction transaction;
     
-    public DaoUsuario setDaoUsuario(Session session, Transaction transaction) {
+    public DaoUsuario setDaoUsuario(Session session) {
         this.setSession(session);
-        this.setTransaction(transaction);
         
         return this;
     }
@@ -23,14 +21,6 @@ public class DaoUsuario {
 
     public void setSession(Session session) {
         this.session = session;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
     }
     
     public boolean checkExistance(String email) {

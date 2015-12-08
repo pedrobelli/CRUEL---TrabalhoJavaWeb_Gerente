@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gerentes;
 
 import java.util.List;
@@ -11,80 +6,68 @@ import utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author Layla
- */
 public class DaoGerente {
-    public List all() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+    private Session session;
+    
+    public DaoGerente setDaoGerente(Session session) {
+        this.setSession(session);
         
-        Query query = session.createSQLQuery("SELECT * FROM Gerentes").addEntity(Gerente.class);        
+        return this;
+    }
+    
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    
+    public List all(Session session) {
+        Query query = this.session.createSQLQuery("SELECT * FROM Gerentes").addEntity(Gerente.class);        
         List gerentes = query.list();
         
         return  gerentes;
     }
     
     public Gerente get(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Query query = session.createSQLQuery("SELECT * FROM Gerentes WHERE id = :id").addEntity(Gerente.class).setParameter("id", id);
-        
+        Query query = this.session.createSQLQuery("SELECT * FROM Gerentes WHERE id = :id").addEntity(Gerente.class).setParameter("id", id);
         List gerentes = query.list();
         
         Gerente gerente = (Gerente) gerentes.get(0);
-
         return gerente;
     }   
     
-    public Gerente checkExistance(String cpf) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Query query = session.createSQLQuery("SELECT * FROM Gerentes WHERE cpf = :cpf").addEntity(Gerente.class).setParameter("cpf", cpf);
-        
+    public boolean checkExistance(String cpf) {
+        Query query = this.session.createSQLQuery("SELECT * FROM Gerentes WHERE cpf = :cpf").addEntity(Gerente.class).setParameter("cpf", cpf);
         List gerentes = query.list();
         
-        Gerente gerente = (Gerente) gerentes.get(0);
-
-        return gerente;
+        return gerentes.size() > 0;
     }   
     
     public List search(String searchQuery) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Query query = session.createSQLQuery("SELECT * FROM Gerentes WHERE nome LIKE '%"+searchQuery+"%'").addEntity(Gerente.class);        
+        Query query = this.session.createSQLQuery("SELECT * FROM Gerentes WHERE nome LIKE '%"+searchQuery+"%'").addEntity(Gerente.class);        
         List gerentes = query.list();
         
         return  gerentes;
     }
     
     public Object create(Gerente gerente) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
-        session.save(gerente);
-        tx.commit();
-        
+        this.session.save(gerente);        
         return gerente;
     }
 
     public Object update(Gerente gerente) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
         Gerente gerentePersistido = this.get(gerente.getId());
         gerentePersistido = gerente;
-        session.update(gerentePersistido);
-        tx.commit();
+        this.session.update(gerentePersistido);
         
         return gerentePersistido;
     }
     
     public void delete(Gerente gerente) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
-        session.delete(gerente);
-        tx.commit();
+        this.session.delete(gerente);
     }
+    
 }
