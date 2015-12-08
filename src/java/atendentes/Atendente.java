@@ -122,7 +122,7 @@ public class Atendente implements Serializable {
     
     public String getTelefone() {
         String telefone = numeroTelefone;        
-        if (telefone != null && telefone.length() > 9) {
+        if (telefone != null && telefone.length() > 7) {
             String codigoArea = String.valueOf(this.codigoAreaTelefone);
             return codigoArea + telefone;
         }
@@ -147,7 +147,7 @@ public class Atendente implements Serializable {
     
     public String getCelular() {
         String celular = numeroCelular;        
-        if (celular != null && celular.length() > 9) {
+        if (celular != null && celular.length() > 7) {
             String codigoArea = String.valueOf(this.codigoAreaCelular);
             return codigoArea + celular;
         }

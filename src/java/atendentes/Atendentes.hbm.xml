@@ -6,7 +6,7 @@
     <class name="atendentes.Atendente" table="atendentes" catalog="cruel_gerente" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="nome" type="string">
             <column name="nome" length="80" />

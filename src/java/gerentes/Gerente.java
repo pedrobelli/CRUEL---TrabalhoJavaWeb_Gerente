@@ -43,6 +43,14 @@ public class Gerente implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    
+    public String getFormatedCpf() {
+        String formatedCpf = cpf.substring(0, 3) + ".";
+        formatedCpf += cpf.substring(3, 6) + ".";
+        formatedCpf += cpf.substring(6, 9) + "-";
+        formatedCpf += cpf.substring(9);
+        return formatedCpf;
+    }
 
     public String getCep() {
         return cep;
@@ -111,6 +119,15 @@ public class Gerente implements Serializable {
     public String getNumeroTelefone() {
         return numeroTelefone;
     }
+    
+    public String getTelefone() {
+        String telefone = numeroTelefone;        
+        if (telefone != null && telefone.length() > 7) {
+            String codigoArea = String.valueOf(this.codigoAreaTelefone);
+            return codigoArea + telefone;
+        }
+        return telefone;
+    }
 
     public void setNumeroTelefone(String numeroTelefone) {
         this.numeroTelefone = numeroTelefone;
@@ -126,6 +143,15 @@ public class Gerente implements Serializable {
 
     public String getNumeroCelular() {
         return numeroCelular;
+    }
+    
+    public String getCelular() {
+        String celular = numeroCelular;        
+        if (celular != null && celular.length() > 7) {
+            String codigoArea = String.valueOf(this.codigoAreaCelular);
+            return codigoArea + celular;
+        }
+        return celular;
     }
 
     public void setNumeroCelular(String numeroCelular) {

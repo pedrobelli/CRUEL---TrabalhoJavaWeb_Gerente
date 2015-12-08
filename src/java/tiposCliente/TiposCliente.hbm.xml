@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/12/2015 18:15:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="cruel_gerente" name="tiposCliente.TipoCliente" optimistic-lock="version" table="tipos_cliente">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="nome" type="string">
+      <column length="80" name="nome"/>
+    </property>
+    <property name="valorRefeicao" type="java.lang.Double">
+      <column name="valor_refeicao" precision="22" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>
