@@ -1,10 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="nutricionistas.Nutricionista"%>
+<%@page import="usuarios.Usuario"%>
 <%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>
 
-<% Nutricionista nutricionista = (Nutricionista) request.getAttribute("nutricionista"); %>
+<% 
+    Nutricionista nutricionista = (Nutricionista) request.getAttribute("nutricionista"); 
+    Usuario usuario = (Usuario) request.getAttribute("usuario"); 
+%>
 
 <main class="main">
     <div class="container row">
@@ -88,14 +92,14 @@
                      
                     <div class="input-field">
                         <label for="email">Email</label>
-                        <input type="email" name="email">
+                        <input type="email" name="email" value="${usuario.email}">
                     </div>
                     <div class="input-field">
                         <label for="senha">Senha</label>
                         <input type="password" name="senha">
                     </div>
                     <div class="input-field">
-                        <label for="confirmSenha">Confirma Senha</label>
+                        <label for="confirmSenha">Confirmar Senha</label>
                         <input type="password" name="confirmSenha">
                     </div>
 

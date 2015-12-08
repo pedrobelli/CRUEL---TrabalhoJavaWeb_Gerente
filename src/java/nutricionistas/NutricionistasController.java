@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import usuarios.Usuario;
 
 @WebServlet(name = "NutricionistasController", urlPatterns = {"/nutricionistas"})
 public class NutricionistasController extends HttpServlet {
@@ -77,8 +78,9 @@ public class NutricionistasController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
                 
             } else if (action.equals("create")) {
+                List<String> errors = this.validate(request);
                 
-                this.validate(request, response);
+                this.validateCreate(request, errors);
                 
                 Nutricionista nutricionista = this.processRequestForm(request);
                 this.create(nutricionista);
@@ -95,7 +97,7 @@ public class NutricionistasController extends HttpServlet {
                 
             } else if (action.equals("update")) {
                 
-                this.validate(request, response);
+                /*this.validate(request);*/
                 
                 Nutricionista nutricionista = this.processRequestForm(request);
                 this.update(nutricionista);
@@ -117,6 +119,7 @@ public class NutricionistasController extends HttpServlet {
             
         } catch (Exception E) {
             request.setAttribute("nutricionista", this.processRequestForError(request));
+            request.setAttribute("usuario", Usuario.processRequestForError(request));
             
             String action = request.getParameter("action");
             
@@ -164,7 +167,7 @@ public class NutricionistasController extends HttpServlet {
         daoNutricionista.delete(nutricionista);
     }
     
-    private void validate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private List<String> validate(HttpServletRequest request) throws Exception {
         List<String> errors = new ArrayList<>();
         
         if (request.getParameter("nome").length() < 1) {
@@ -206,12 +209,31 @@ public class NutricionistasController extends HttpServlet {
                 errors.add("O campo celular não pode conter mais de 11 digitos;");
             }
         }
-
+        
+        return errors; 
+    }
+    
+    private void validateCreate(HttpServletRequest request, List<String> errors) throws Exception {
+        if (request.getParameter("email").length() < 1) {
+            errors.add("O campo email deve ser preenchido;");
+        }
+        
+        String senha = request.getParameter("senha");
+        String confirmSenha = request.getParameter("confirmSenha");
+        
+        if (senha.length() < 1 || confirmSenha.length() < 1) {
+            errors.add("Os campo senha e confirma senha devem ser preenchidos;");
+        } else {
+            if (!senha.equals(confirmSenha)) {
+                errors.add("Os campo senha e confirma senha estão diferentes;");
+            }
+        }
+        
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);
             throw new Exception();
-        }    
+        }   
     }
     
     private Nutricionista processRequestForm(HttpServletRequest request) {
@@ -227,7 +249,7 @@ public class NutricionistasController extends HttpServlet {
         //Endereço
         nutri.setCep(request.getParameter("cep"));
         
-        if (request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado") != null && request.getParameter("estado").length() > 0) {
             nutri.setEstado(Integer.parseInt(request.getParameter("estado")));
         }
         
@@ -269,7 +291,7 @@ public class NutricionistasController extends HttpServlet {
         //Endereço
         nutri.setCep(request.getParameter("cep"));
         
-        if (request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado") != null && request.getParameter("estado").length() > 0) {
             nutri.setEstado(Integer.parseInt(request.getParameter("estado")));
         }
         
