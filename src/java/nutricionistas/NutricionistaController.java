@@ -60,6 +60,12 @@ public class NutricionistaController extends HttpServlet {
                 request.setAttribute("nutricionistas", this.all()); 
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
           
+            } else if (action.equals("search")) {
+                String searchQuery = request.getParameter("searchQuery");
+                
+                request.setAttribute("nutricionistas", this.search(searchQuery)); 
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+                
             } else if (action.equals("new")) {
                 
                 request.setAttribute("nutricionista", new Nutricionista());
@@ -97,6 +103,15 @@ public class NutricionistaController extends HttpServlet {
         
         DaoNutricionista daoNutricionista = new DaoNutricionista();
         nutricionistas = (List) daoNutricionista.all();
+        
+        return nutricionistas;
+    }
+    
+    public List<Nutricionista> search(String searchQuery) throws SQLException {
+        List<Nutricionista> nutricionistas = new ArrayList<Nutricionista>();
+        
+        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        nutricionistas = (List) daoNutricionista.search(searchQuery);
         
         return nutricionistas;
     }

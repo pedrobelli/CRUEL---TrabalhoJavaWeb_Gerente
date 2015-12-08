@@ -12,9 +12,9 @@
     <h3 class="center">Nutricionistas</h3>
     <section>
         <div class="container">
-            <form>
+            <form class="cadast" action="<%=url%>nutricionistas?action=search" method="post">
                 <div class="input-field main-search" >
-                    <input id="search-nutri" type="search" required>
+                    <input id="search-nutri" type="search" name="searchQuery" required>
                     <label for="search-nutri"><span>Buscar Nutricionista</span></label>
                     <button class="btn btn-main-search blue right" type="submit" name="action">Buscar
                         <i class="material-icons right">search</i>

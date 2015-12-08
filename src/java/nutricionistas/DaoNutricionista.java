@@ -17,6 +17,15 @@ public class DaoNutricionista {
         return  nutricionistas;
     }
     
+    public List search(String searchQuery) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Query query = session.createSQLQuery("SELECT * FROM Nutricionistas WHERE nome LIKE '%"+searchQuery+"%'").addEntity(Nutricionista.class);        
+        List nutricionistas = query.list();
+        
+        return  nutricionistas;
+    }
+    
     public void create(Nutricionista nutricionista) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
