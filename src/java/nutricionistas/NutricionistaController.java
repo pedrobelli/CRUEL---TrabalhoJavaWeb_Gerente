@@ -115,6 +115,17 @@ public class NutricionistaController extends HttpServlet {
             
             }
             
+        } catch (Exception E) {
+            request.setAttribute("nutricionista", this.processRequestForError(request));
+            
+            String action = request.getParameter("action");
+            
+            if (action != null && action.equals("create")) {
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
+            } else if (action != null && action.equals("update")) {
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/edit.jsp").forward(request, response);
+            }
+            
         } finally {
             out.close();
         }
@@ -156,59 +167,51 @@ public class NutricionistaController extends HttpServlet {
     private void validate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<String> errors = new ArrayList<>();
         
-        try {
-            if (request.getParameter("nome").length() < 1) {
-                errors.add("O campo nome deve ser preenchido;");
-            }
-
-            if (request.getParameter("cpf").length() < 1) {
-                errors.add("O campo cpf deve ser preenchido;");
-            } else {
-                String cpf = request.getParameter("cpf");
-                if (cpf.length() != 11) {
-                    errors.add("O campo cpf deve conter 11 digitos;");
-                }
-            }
-
-            if (request.getParameter("crn").length() < 1) {
-                errors.add("O campo crn deve ser preenchido;");
-            }
-            
-            String cep = request.getParameter("cep");
-            if (cep.length() > 0 && cep.length() != 8) {
-                errors.add("O campo cep deve conter 8 digitos;");
-            }
-            
-            String numeroTelefone = request.getParameter("numeroTelefone");
-            if (numeroTelefone.length() > 0) {
-                if (numeroTelefone.length() < 10) {
-                    errors.add("O campo telefone deve conter no mínimo 10 digitos;");
-                } else if (numeroTelefone.length() > 11) {
-                    errors.add("O campo telefone não pode conter mais de 11 digitos;");
-                }
-            }
-            
-            String numeroCelular = request.getParameter("numeroCelular");
-            if (numeroCelular.length() > 0) {
-                if (numeroCelular.length() < 10) {
-                    errors.add("O campo celular deve conter no mínimo 10 digitos;");
-                } else if (numeroCelular.length() > 11) {
-                    errors.add("O campo celular não pode conter mais de 11 digitos;");
-                }
-            }
-
-            if (!errors.isEmpty()) {
-                errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
-                throw new Exception();
-            } 
-        } catch (Exception E) {
-            request.setAttribute("errors", errors);
-            request.setAttribute("nutricionista", this.processRequestForError(request));
-            
-            getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
+        if (request.getParameter("nome").length() < 1) {
+            errors.add("O campo nome deve ser preenchido;");
         }
-        
-        
+
+        if (request.getParameter("cpf").length() < 1) {
+            errors.add("O campo cpf deve ser preenchido;");
+        } else {
+            String cpf = request.getParameter("cpf");
+            if (cpf.length() != 11) {
+                errors.add("O campo cpf deve conter 11 digitos;");
+            }
+        }
+
+        if (request.getParameter("crn").length() < 1) {
+            errors.add("O campo crn deve ser preenchido;");
+        }
+
+        String cep = request.getParameter("cep");
+        if (cep.length() > 0 && cep.length() != 8) {
+            errors.add("O campo cep deve conter 8 digitos;");
+        }
+
+        String numeroTelefone = request.getParameter("numeroTelefone");
+        if (numeroTelefone.length() > 0) {
+            if (numeroTelefone.length() < 10) {
+                errors.add("O campo telefone deve conter no mínimo 10 digitos;");
+            } else if (numeroTelefone.length() > 11) {
+                errors.add("O campo telefone não pode conter mais de 11 digitos;");
+            }
+        }
+
+        String numeroCelular = request.getParameter("numeroCelular");
+        if (numeroCelular.length() > 0) {
+            if (numeroCelular.length() < 10) {
+                errors.add("O campo celular deve conter no mínimo 10 digitos;");
+            } else if (numeroCelular.length() > 11) {
+                errors.add("O campo celular não pode conter mais de 11 digitos;");
+            }
+        }
+
+        if (!errors.isEmpty()) {
+            errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
+            request.setAttribute("errors", errors);
+            throw new Exception();
+        }    
     }
     
     private Nutricionista processRequest(HttpServletRequest request) {
@@ -224,9 +227,9 @@ public class NutricionistaController extends HttpServlet {
         //Endereço
         nutri.setCep(request.getParameter("cep"));
         
-        /*if (request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado").length() > 0) {
             nutri.setEstado(Integer.parseInt(request.getParameter("estado")));
-        }*/
+        }
         
         nutri.setCidade(request.getParameter("cidade"));
         nutri.setBairro(request.getParameter("bairro"));
@@ -266,9 +269,9 @@ public class NutricionistaController extends HttpServlet {
         //Endereço
         nutri.setCep(request.getParameter("cep"));
         
-        /*if (request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado").length() > 0) {
             nutri.setEstado(Integer.parseInt(request.getParameter("estado")));
-        }*/
+        }
         
         nutri.setCidade(request.getParameter("cidade"));
         nutri.setBairro(request.getParameter("bairro"));

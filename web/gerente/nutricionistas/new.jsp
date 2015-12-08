@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="nutricionistas.Nutricionista"%>
+<%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>
 
@@ -7,7 +8,7 @@
 
 <main class="main">
     <div class="container row">
-
+        
         <%@ include file="/gerente/actionbutton.jsp"%>
 
         <h3 class="center">Nutricionistas</h3>
@@ -45,10 +46,10 @@
                         <label for="numeroEndereco">Numero</label>
                         <input type="number" name="numeroEndereco" value="${nutricionista.numeroEndereco}">
                     </div>
-                   <div class="input-field">
+                    <div class="input-field">
                         <label for="complemento">Complemento</label>
                         <input type="text" name="complemento" value="${nutricionista.complemento}">
-                   </div>
+                    </div>
                     <div class="input-field">
                         <label for="bairro">Bairro</label>
                         <input type="text" name="bairro" value="${nutricionista.bairro}">
@@ -56,28 +57,34 @@
                     <div class="input-field">
                         <label for="cidade">Cidade</label>
                         <input type="text" name="cidade" value="${nutricionista.cidade}">
+                     </div>
+                     
+                    <div class="input-field">
+                        <select name="estado" class="browser-default" value="">
+                            <option value="" disabled selected>Estados</option>
+                            <%
+                                for(Estado estado : Estado.values()){ 
+                                    if (estado.getCod() == nutricionista.getEstado()) {
+                                        out.println("<option value='" + estado.getCod() + "' selected>" + estado.getNome() + "</option>");
+                                    } else {
+                                        out.println("<option value='" + estado.getCod() + "'>" + estado.getNome() + "</option>");
+                                    }
+
+                                }
+                            %>
+                        </select>
                     </div>
-                   <div>
-                   <div class="input-field">
-                        <select name="estado" class="browser-default">
-                           <option value="" disabled selected>Estado</option>
-                           <option value="1">Option 1</option>
-                           <option value="2">Option 2</option>
-                           <option value="3">Option 3</option>
-                         </select>
-                    </div>
-                   </div>
                    
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
 
                         <input type="text" name="numeroTelefone" class ="cellphones" value="${nutricionista.numeroTelefone}">
-                     </div>
+                    </div>
                     <div class="input-field">
                         <label for="numeroCelular">Celular</label>
                         <input type="text" name="numeroCelular" class ="cellphones" value="${nutricionista.numeroCelular}">
 
-                     </div>
+                    </div>
                      
                     <div class="input-field">
                         <label for="email">Email:</label>
