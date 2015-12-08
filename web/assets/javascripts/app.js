@@ -9,7 +9,7 @@ $(document).ready(function(){
     $('.percentage').inputmask({alias: 'percentage', greedy : false, rightAlign: false});
     $('.federal-id').inputmask('999.999.999-99', {removeMaskOnSubmit: true});
     $('.cnpj').inputmask('99.999.999/9999-99');
-    $('.cellphones').inputmask('(99) [9]9999-9999', {greedy : false, numericInput: true, removeMaskOnSubmit: true});
+    $('.cellphones').inputmask('(99) [9]9999-9999', {greedy : false, removeMaskOnSubmit: true});
     $('.agency').inputmask('9999');
     $('.account').inputmask('99999[99999]');
 

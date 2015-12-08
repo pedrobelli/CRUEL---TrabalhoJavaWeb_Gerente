@@ -12,13 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import usuarios.DaoUsuario;
 import usuarios.Usuario;
+import utils.HibernateUtil;
+import utils.TipoUsuarioEnum.TipoUsuario;
 
 @WebServlet(name = "NutricionistasController", urlPatterns = {"/nutricionistas"})
 public class NutricionistasController extends HttpServlet {
     
-    HttpServletRequest request;
-    HttpServletResponse response;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private Session session;
+    private Transaction transaction;
     
     public HttpServletRequest getRequest() {
         return request;
@@ -34,6 +41,22 @@ public class NutricionistasController extends HttpServlet {
 
     public void setResponse(HttpServletResponse response) {
         this.response = response;
+    }
+    
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 
     /**
@@ -53,6 +76,8 @@ public class NutricionistasController extends HttpServlet {
         try {
             this.setRequest(request);
             this.setResponse(response);
+            this.setSession(HibernateUtil.getSessionFactory().openSession());
+            this.setTransaction(this.getSession().beginTransaction());
             
             String action = request.getParameter("action");
             
@@ -78,18 +103,24 @@ public class NutricionistasController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
                 
             } else if (action.equals("create")) {
-                List<String> errors = this.validate(request);
+                List<String> errors = this.validate();
                 
-                this.validateCreate(request, errors);
+                this.validateCreate(errors);
                 
-                Nutricionista nutricionista = this.processRequestForm(request);
+                Nutricionista nutricionista = this.processRequestForm();
                 this.create(nutricionista);
                 
+                Usuario usuario = Usuario.processRequestForm(request);
+                this.createUsuario(usuario, nutricionista.getId());
+                
                 request.setAttribute("nutricionistas", this.all());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
                 
             } else if (action.equals("edit")) {
-                DaoNutricionista daoNutricionista = new DaoNutricionista();
+                DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
                 int id = Integer.parseInt(request.getParameter("id"));
                 
                 request.setAttribute("nutricionista", daoNutricionista.get(id));
@@ -99,7 +130,7 @@ public class NutricionistasController extends HttpServlet {
                 
                 /*this.validate(request);*/
                 
-                Nutricionista nutricionista = this.processRequestForm(request);
+                Nutricionista nutricionista = this.processRequestForm();
                 this.update(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
@@ -117,15 +148,17 @@ public class NutricionistasController extends HttpServlet {
             
             }
             
-        } catch (Exception E) {
-            request.setAttribute("nutricionista", this.processRequestForError(request));
+        } catch (Exception E) {            
+            request.setAttribute("nutricionista", this.processRequestForError());
             request.setAttribute("usuario", Usuario.processRequestForError(request));
             
             String action = request.getParameter("action");
             
             if (action != null && action.equals("create")) {
+                this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
             } else if (action != null && action.equals("update")) {
+                this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/edit.jsp").forward(request, response);
             }
             
@@ -137,8 +170,8 @@ public class NutricionistasController extends HttpServlet {
     public List<Nutricionista> all() throws SQLException {
         List<Nutricionista> nutricionistas = new ArrayList<Nutricionista>();
         
-        DaoNutricionista daoNutricionista = new DaoNutricionista();
-        nutricionistas = (List) daoNutricionista.all();
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        nutricionistas = (List) daoNutricionista.all(this.getSession());
         
         return nutricionistas;
     }
@@ -146,30 +179,39 @@ public class NutricionistasController extends HttpServlet {
     public List<Nutricionista> search(String searchQuery) throws SQLException {
         List<Nutricionista> nutricionistas = new ArrayList<Nutricionista>();
         
-        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
         nutricionistas = (List) daoNutricionista.search(searchQuery);
         
         return nutricionistas;
     }
     
     public void create(Nutricionista nutricionista) throws SQLException {
-        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
         daoNutricionista.create(nutricionista);
     }
     
+    public void createUsuario(Usuario usuario, int idDono) throws SQLException {
+        usuario.setTipoUsuario(TipoUsuario.NUTRICIONISTA.getCod());
+        usuario.setIdDono(idDono);
+        Usuario.create(usuario, this.getSession(), this.getTransaction());
+        
+    }
+    
     public void update(Nutricionista nutricionista) throws SQLException {
-        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
         daoNutricionista.update(nutricionista);
     }
     
     public void delete(Nutricionista nutricionista) throws SQLException {
-        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        Usuario.delete(nutricionista.getId(), this.getSession(), this.getTransaction());
         daoNutricionista.delete(nutricionista);
     }
     
-    private List<String> validate(HttpServletRequest request) throws Exception {
+    private List<String> validate() {
         List<String> errors = new ArrayList<>();
-        
+        HttpServletRequest request = this.getRequest();
+                
         if (request.getParameter("nome").length() < 1) {
             errors.add("O campo nome deve ser preenchido;");
         }
@@ -178,7 +220,11 @@ public class NutricionistasController extends HttpServlet {
             errors.add("O campo cpf deve ser preenchido;");
         } else {
             String cpf = request.getParameter("cpf");
-            if (cpf.length() != 11) {
+            DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
+        
+            if (daoNutricionista.checkExistance(cpf)) {
+                errors.add("Já existe um nutricionista cadastrado com este cpf;");
+            } else if (cpf.length() != 11) {
                 errors.add("O campo cpf deve conter 11 digitos;");
             }
         }
@@ -213,14 +259,22 @@ public class NutricionistasController extends HttpServlet {
         return errors; 
     }
     
-    private void validateCreate(HttpServletRequest request, List<String> errors) throws Exception {
-        if (request.getParameter("email").length() < 1) {
+    private void validateCreate(List<String> errors) throws Exception {
+        HttpServletRequest request = this.getRequest();
+        
+        String email = request.getParameter("email");
+        if (email.length() < 1) {
             errors.add("O campo email deve ser preenchido;");
+        } else {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession(), this.getTransaction());;
+            
+            if (daoUsuario.checkExistance(email)) {
+                errors.add("Já existe um usuário cadastrado com este email;");
+            }
         }
         
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
-        
         if (senha.length() < 1 || confirmSenha.length() < 1) {
             errors.add("Os campo senha e confirma senha devem ser preenchidos;");
         } else {
@@ -236,8 +290,9 @@ public class NutricionistasController extends HttpServlet {
         }   
     }
     
-    private Nutricionista processRequestForm(HttpServletRequest request) {
+    private Nutricionista processRequestForm() {
         Nutricionista nutri = new Nutricionista();
+        HttpServletRequest request = this.getRequest();
         
         if (request.getParameter("id") != null) {
             nutri.setId(Integer.parseInt(request.getParameter("id")));
@@ -278,8 +333,9 @@ public class NutricionistasController extends HttpServlet {
         return nutri;
     }
 
-    private Nutricionista processRequestForError(HttpServletRequest request) {
+    private Nutricionista processRequestForError() {
         Nutricionista nutri = new Nutricionista();
+        HttpServletRequest request = this.getRequest();
         
         if (request.getParameter("id") != null) {
             nutri.setId(Integer.parseInt(request.getParameter("id")));

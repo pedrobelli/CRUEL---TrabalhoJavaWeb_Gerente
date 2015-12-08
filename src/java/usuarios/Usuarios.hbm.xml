@@ -14,7 +14,7 @@
       <column name="tipo_usuario"/>
     </property>
     <property name="idDono" type="java.lang.Integer">
-      <column name="idDono"/>
+      <column name="id_dono"/>
     </property>
   </class>
 </hibernate-mapping>

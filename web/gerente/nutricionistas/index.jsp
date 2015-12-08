@@ -24,7 +24,7 @@
             <ul class="main-list">
                 <%        
                     List<Nutricionista> nutricionistas = (List) request.getAttribute("nutricionistas");
-                    if(nutricionistas.size()>=0){
+                    if(nutricionistas.size()>0){
                         int index;
                         for(index=0; index < nutricionistas.size(); index++){                   
                             Nutricionista nutricionista = nutricionistas.get(index);
@@ -46,7 +46,7 @@
                         }
                     }
                     else{
-                        out.println("Nao existem Atividades cadastrados.");
+                        out.println("Nenhum nutricionista foi encontrado.<br>");
                     }
                 %>
             </ul>

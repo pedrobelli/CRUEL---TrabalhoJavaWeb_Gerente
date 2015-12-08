@@ -155,7 +155,7 @@ public class Nutricionista implements Serializable {
     }
 
     public String getCelular() {
-        String celular = numeroCelular;        
+        String celular = this.numeroCelular;
         if (celular != null && celular.length() > 7) {
             String codigoArea = String.valueOf(this.codigoAreaCelular);
             return codigoArea + celular;

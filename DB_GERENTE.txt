@@ -5,7 +5,7 @@ CREATE TABLE usuarios(
   email        VARCHAR(80),
   senha        VARCHAR(255),
   tipo_usuario INTEGER,
-  idDono       INTEGER NOT NULL,
+  id_dono       INTEGER NOT NULL,
 
   PRIMARY KEY (email)
 );
