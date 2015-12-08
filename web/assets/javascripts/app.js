@@ -19,10 +19,11 @@ $(document).ready(function(){
         prefix: "R$ ",
         placeHolder: '0,0',
         autoUnmask: true,
-        rightAlign: false
+        rightAlign: false,
+        numericInput: true
       }
     });
-    $('.currency').inputmask({alias: 'currency'});
+    $('.currency').inputmask('R$ 999.999.999,99', { numericInput: true, rightAlign: true });
 
     $('.email').inputmask({
       mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",

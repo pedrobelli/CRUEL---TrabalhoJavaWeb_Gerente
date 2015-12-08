@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tiposCliente;
 
 import java.util.List;
@@ -10,12 +5,10 @@ import org.hibernate.Query;
 import utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-/**
- *
- * @author Layla
- */
+
 public class DaoTipoCliente {
-     public List all() {
+    
+    public List all() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         Query query = session.createSQLQuery("SELECT * FROM tipos_cliente").addEntity(TipoCliente.class);        
@@ -39,7 +32,7 @@ public class DaoTipoCliente {
     public TipoCliente checkExistance(String cpf) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
-        Query query = session.createSQLQuery("SELECT * FROM tipos_cliente WHERE cpf = :cpf").addEntity(TipoCliente.class).setParameter("cpf", cpf);
+        Query query = session.createSQLQuery("SELECT * FROM tipos_cliente WHERE name = :name").addEntity(TipoCliente.class).setParameter("cpf", cpf);
         
         List tiposCliente = query.list();
         
@@ -86,4 +79,5 @@ public class DaoTipoCliente {
         session.delete(tipoCliente);
         tx.commit();
     }
+    
 }

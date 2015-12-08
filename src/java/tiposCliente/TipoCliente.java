@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class TipoCliente implements Serializable {
     private int    id;
     private String nome;
-    private float  valorRefeicao;
+    private double  valorRefeicao;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class TipoCliente implements Serializable {
         this.nome = nome;
     }
 
-    public float getValorRefeicao() {
+    public double getValorRefeicao() {
         return valorRefeicao;
     }
 
-    public void setValorRefeicao(float valorRefeicao) {
+    public void setValorRefeicao(double valorRefeicao) {
         this.valorRefeicao = valorRefeicao;
     }
 }
