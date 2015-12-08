@@ -30,11 +30,17 @@
                             Nutricionista nutricionista = nutricionistas.get(index);
                             String htmlBody ="<li class='main-item'>";
                             htmlBody+="<span>" + nutricionista.getNome() + " - " + nutricionista.getFormatedCpf()+ "</span>";
+                            
                             htmlBody+="<form action='" + url + "nutricionistas' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + nutricionista.getId() + "'>";
                             htmlBody+="<input type='hidden' name='action' value='delete'>";
-                            htmlBody+="<button class='btn  blue' type='submit'> <i class='material-icons right'>delete</i></button></form>";
-                            htmlBody+="<a href='#'> <i class='material-icons right'>edit</i></a></li>";
+                            htmlBody+="<button class='btn  blue' type='submit'> <i class='material-icons right'>delete</i></button>";
+                            htmlBody+="</form>";
+                            
+                            htmlBody+="<form action='" + url + "nutricionistas?action=edit' method='post'>";
+                            htmlBody+="<input type='hidden' name='id' value='" + nutricionista.getId() + "'>";
+                            htmlBody+="<button class='btn  blue' type='submit'> <i class='material-icons right'>edit</i></button></form>";
+                            htmlBody+="</form>";
 
                             out.println(htmlBody);
                         }
