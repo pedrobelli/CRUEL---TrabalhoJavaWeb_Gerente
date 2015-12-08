@@ -12882,7 +12882,7 @@ main .section .card-action a {
 }
 /* line 101, ../sass/admin.scss */
 .entry-list .entry-item {
-  min-height: 30px;
+  min-height: 40px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }

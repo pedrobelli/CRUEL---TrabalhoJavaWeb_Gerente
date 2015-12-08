@@ -17,6 +17,18 @@ public class DaoNutricionista {
         return  nutricionistas;
     }
     
+    public Nutricionista get(int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Query query = session.createSQLQuery("SELECT * FROM Nutricionistas WHERE id = :id").addEntity(Nutricionista.class).setParameter("id", id);
+        
+        List nutricionistas = query.list();
+        
+        Nutricionista nutricionista = (Nutricionista) nutricionistas.get(0);
+
+        return nutricionista;
+    }
+    
     public List search(String searchQuery) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
@@ -31,6 +43,16 @@ public class DaoNutricionista {
         
         Transaction tx = session.beginTransaction();
         session.save(nutricionista);
+        tx.commit();
+    }
+
+    public void update(Nutricionista nutricionista) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        Nutricionista nutricionistaPersistido = this.get(nutricionista.getId());
+        nutricionistaPersistido = nutricionista;
+        session.update(nutricionistaPersistido);
         tx.commit();
     }
     

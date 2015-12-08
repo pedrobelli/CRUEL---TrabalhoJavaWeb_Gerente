@@ -63,7 +63,12 @@ public class NutricionistaController extends HttpServlet {
             } else if (action.equals("search")) {
                 String searchQuery = request.getParameter("searchQuery");
                 
-                request.setAttribute("nutricionistas", this.search(searchQuery)); 
+                if (!searchQuery.equals("")) {
+                    request.setAttribute("nutricionistas", this.search(searchQuery));
+                } else {
+                    request.setAttribute("nutricionistas", this.all());
+                }
+                 
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
                 
             } else if (action.equals("new")) {
@@ -77,6 +82,23 @@ public class NutricionistaController extends HttpServlet {
                 
                 Nutricionista nutricionista = this.processRequest(request);
                 this.create(nutricionista);
+                
+                request.setAttribute("nutricionistas", this.all());
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+                
+            } else if (action.equals("edit")) {
+                DaoNutricionista daoNutricionista = new DaoNutricionista();
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                request.setAttribute("nutricionista", daoNutricionista.get(id));
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/edit.jsp").forward(request, response);
+                
+            } else if (action.equals("update")) {
+                
+                this.validate(request, response);
+                
+                Nutricionista nutricionista = this.processRequest(request);
+                this.update(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
@@ -119,6 +141,11 @@ public class NutricionistaController extends HttpServlet {
     public void create(Nutricionista nutricionista) throws SQLException {
         DaoNutricionista daoNutricionista = new DaoNutricionista();
         daoNutricionista.create(nutricionista);
+    }
+    
+    public void update(Nutricionista nutricionista) throws SQLException {
+        DaoNutricionista daoNutricionista = new DaoNutricionista();
+        daoNutricionista.update(nutricionista);
     }
     
     public void delete(Nutricionista nutricionista) throws SQLException {

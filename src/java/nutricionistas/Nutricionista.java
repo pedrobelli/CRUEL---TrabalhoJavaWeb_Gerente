@@ -129,6 +129,15 @@ public class Nutricionista implements Serializable {
         return numeroTelefone;
     }
 
+    public String getTelefone() {
+        String telefone = numeroTelefone;        
+        if (telefone != null && telefone.length() > 9) {
+            String codigoArea = String.valueOf(this.codigoAreaTelefone);
+            return codigoArea + telefone;
+        }
+        return telefone;
+    }
+
     public void setNumeroTelefone(String numeroTelefone) {
         this.numeroTelefone = numeroTelefone;
     }
@@ -143,6 +152,15 @@ public class Nutricionista implements Serializable {
 
     public String getNumeroCelular() {
         return numeroCelular;
+    }
+
+    public String getCelular() {
+        String celular = numeroCelular;        
+        if (celular != null && celular.length() > 9) {
+            String codigoArea = String.valueOf(this.codigoAreaCelular);
+            return codigoArea + celular;
+        }
+        return celular;
     }
 
     public void setNumeroCelular(String numeroCelular) {
