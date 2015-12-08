@@ -7,77 +7,78 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class DaoNutricionista {
+    private Session session;
+    private Transaction transaction;
     
-    public List all() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+    public DaoNutricionista setDaoNutricionista(Session session, Transaction transaction) {
+        this.setSession(session);
+        this.setTransaction(transaction);
         
-        Query query = session.createSQLQuery("SELECT * FROM Nutricionistas").addEntity(Nutricionista.class);        
+        return this;
+    }
+    
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    
+    public List all(Session session) {
+        Query query = this.session.createSQLQuery("SELECT * FROM Nutricionistas").addEntity(Nutricionista.class);        
         List nutricionistas = query.list();
         
         return  nutricionistas;
     }
     
     public Nutricionista get(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Query query = session.createSQLQuery("SELECT * FROM Nutricionistas WHERE id = :id").addEntity(Nutricionista.class).setParameter("id", id);
-        
+        Query query = this.session.createSQLQuery("SELECT * FROM Nutricionistas WHERE id = :id").addEntity(Nutricionista.class).setParameter("id", id);
         List nutricionistas = query.list();
         
         Nutricionista nutricionista = (Nutricionista) nutricionistas.get(0);
-
         return nutricionista;
     }   
     
-    public Nutricionista checkExistance(String cpf) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Query query = session.createSQLQuery("SELECT * FROM Nutricionistas WHERE cpf = :cpf").addEntity(Nutricionista.class).setParameter("cpf", cpf);
-        
+    public boolean checkExistance(String cpf) {
+        Query query = this.session.createSQLQuery("SELECT * FROM Nutricionistas WHERE cpf = :cpf").addEntity(Nutricionista.class).setParameter("cpf", cpf);
         List nutricionistas = query.list();
         
-        Nutricionista nutricionista = (Nutricionista) nutricionistas.get(0);
-
-        return nutricionista;
+        return nutricionistas.size() > 0;
     }   
     
     public List search(String searchQuery) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Query query = session.createSQLQuery("SELECT * FROM Nutricionistas WHERE nome LIKE '%"+searchQuery+"%'").addEntity(Nutricionista.class);        
+        Query query = this.session.createSQLQuery("SELECT * FROM Nutricionistas WHERE nome LIKE '%"+searchQuery+"%'").addEntity(Nutricionista.class);        
         List nutricionistas = query.list();
         
         return  nutricionistas;
     }
     
     public Object create(Nutricionista nutricionista) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
-        session.save(nutricionista);
-        tx.commit();
+        this.session.save(nutricionista);
         
         return nutricionista;
     }
 
     public Object update(Nutricionista nutricionista) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
         Nutricionista nutricionistaPersistido = this.get(nutricionista.getId());
         nutricionistaPersistido = nutricionista;
-        session.update(nutricionistaPersistido);
-        tx.commit();
+        this.session.update(nutricionistaPersistido);
         
         return nutricionistaPersistido;
     }
     
     public void delete(Nutricionista nutricionista) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        Transaction tx = session.beginTransaction();
-        session.delete(nutricionista);
-        tx.commit();
+        this.session.delete(nutricionista);
     }
     
 }

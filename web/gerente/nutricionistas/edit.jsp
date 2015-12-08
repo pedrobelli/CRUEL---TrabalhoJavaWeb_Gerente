@@ -79,7 +79,7 @@
                         <input type="text" name="numeroTelefone" class ="cellphones" value="<%=nutricionista.getTelefone()%>">
                     </div>
                     <div class="input-field">
-                        <label for="numeroCelular">Celular</label>
+                        <label for="numeroCelular">Celular(<%=nutricionista.getCelular()%>)</label>
                         <input type="text" name="numeroCelular" class ="cellphones" value="<%=nutricionista.getCelular()%>">
                     </div>
                      

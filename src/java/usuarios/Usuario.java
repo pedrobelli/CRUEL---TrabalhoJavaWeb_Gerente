@@ -1,9 +1,15 @@
 package usuarios;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import nutricionistas.DaoNutricionista;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class Usuario implements Serializable {
     private String email;
@@ -43,11 +49,15 @@ public class Usuario implements Serializable {
         this.idDono = idDono;
     }
     
-    public static Usuario processRequestForm(HttpServletRequest request) {
+    public static Usuario processRequestForm(HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         Usuario usu = new Usuario();
+        String senha = request.getParameter("senha");
+        
+        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        messageDigest.update(senha.getBytes("UTF-8"));
         
         usu.setEmail(request.getParameter("email"));
-        usu.setSenha(request.getParameter("senha"));
+        usu.setSenha(new BigInteger(1,messageDigest.digest()).toString(16));
 
         return usu;
     }
@@ -60,18 +70,19 @@ public class Usuario implements Serializable {
         return usu;
     }
     
-    public static void create(Usuario usuario) throws SQLException {
-        DaoUsuario daoUsuario = new DaoUsuario();
+    public static void create(Usuario usuario, Session session, Transaction transaction) throws SQLException {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session, transaction);
         daoUsuario.create(usuario);
     }
     
-    public static void update(Usuario usuario) throws SQLException {
-        DaoUsuario daoUsuario = new DaoUsuario();
+    public static void update(Usuario usuario, Session session, Transaction transaction) throws SQLException {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session, transaction);
         daoUsuario.update(usuario);
     }
     
-    public static void delete(Usuario usuario) throws SQLException {
-        DaoUsuario daoUsuario = new DaoUsuario();
+    public static void delete(int idDono, Session session, Transaction transaction) throws SQLException {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session, transaction);
+        Usuario usuario = (Usuario) daoUsuario.getByOwner(idDono);
         daoUsuario.delete(usuario);
     }
     
