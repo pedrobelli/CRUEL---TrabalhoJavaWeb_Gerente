@@ -11,7 +11,7 @@
     <mapping resource="gerentes/Gerentes.hbm.xml"/>
     <mapping resource="usuarios/Usuarios.hbm.xml"/>
     <mapping resource="nutricionistas/Nutricionistas.hbm.xml"/>
-    <mapping resource="tipos_cliente/TiposCliente.hbm.xml"/>
+    <mapping resource="tiposCliente/TiposCliente.hbm.xml"/>
     <mapping resource="atendentes/Atendentes.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

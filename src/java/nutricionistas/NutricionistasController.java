@@ -19,8 +19,8 @@ import usuarios.Usuario;
 import utils.HibernateUtil;
 import utils.TipoUsuarioEnum.TipoUsuario;
 
-@WebServlet(name = "NutricionistaController", urlPatterns = {"/nutricionistas"})
-public class NutricionistaController extends HttpServlet {
+@WebServlet(name = "NutricionistasController", urlPatterns = {"/nutricionistas"})
+public class NutricionistasController extends HttpServlet {
     
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -382,9 +382,9 @@ public class NutricionistaController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -402,9 +402,9 @@ public class NutricionistaController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(NutricionistaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NutricionistasController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
