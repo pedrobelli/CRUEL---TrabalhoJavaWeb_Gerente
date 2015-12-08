@@ -31,15 +31,15 @@
                             String htmlBody ="<li class='main-item'>";
                             htmlBody+="<span>" + nutricionista.getNome() + " - " + nutricionista.getFormatedCpf()+ "</span>";
                             
-                            htmlBody+="<form action='" + url + "nutricionistas' method='post'>";
+                            htmlBody+="<form class='list-form right' action='" + url + "nutricionistas' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + nutricionista.getId() + "'>";
                             htmlBody+="<input type='hidden' name='action' value='delete'>";
-                            htmlBody+="<button class='btn btn-delete  blue' type='submit'> <i class='material-icons right'>delete</i></button></form>";
+                            htmlBody+="<button class='btn btn-delete  blue' type='submit'> <i class='material-icons'>delete</i></button></form>";
                             htmlBody+="</form>";
                             
-                            htmlBody+="<form action='" + url + "nutricionistas?action=edit' method='post'>";
+                            htmlBody+="<form class='list-form right' action='" + url + "nutricionistas?action=edit' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + nutricionista.getId() + "'>";
-                            htmlBody+="<button class='btn  blue' type='submit'> <i class='material-icons right'>edit</i></button></form>";
+                            htmlBody+="<button class='btn btn-edit  blue' type='submit'> <i class='material-icons'>edit</i></button></form>";
                             htmlBody+="</form>";
 
                             out.println(htmlBody);

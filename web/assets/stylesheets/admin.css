@@ -12824,7 +12824,7 @@ main .section .card-action a {
 }
 /* line 36, ../sass/admin.scss */
 .main .main-list .main-item {
-  min-height: 30px;
+  min-height: 40px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }
@@ -12864,61 +12864,66 @@ main .section .card-action a {
 }
 /* line 83, ../sass/admin.scss */
 .main .btn.btn-delete, .main .btn-delete.btn-large {
-  background-color: transparent;
+  padding: 0 5px;
 }
-/* line 86, ../sass/admin.scss */
+/* line 87, ../sass/admin.scss */
 .main .btn.btn-edit, .main .btn-edit.btn-large {
-  background-color: transparent;
+  padding: 0 5px;
+}
+/* line 91, ../sass/admin.scss */
+.main .list-form {
+  display: inline-block;
+  margin: 2px 5px;
 }
 
-/* line 93, ../sass/admin.scss */
+/* line 99, ../sass/admin.scss */
 .entry-list {
   overflow: auto;
 }
-/* line 95, ../sass/admin.scss */
+/* line 101, ../sass/admin.scss */
 .entry-list .entry-item {
   min-height: 30px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }
 
-/* line 102, ../sass/admin.scss */
+/* line 108, ../sass/admin.scss */
 form {
   margin: 50px 0;
 }
 
-/* line 108, ../sass/admin.scss */
+/* line 114, ../sass/admin.scss */
 .search-entry #search-entryi:focus {
   background-color: transparent;
   border-bottom: 1px solid #9e9e9e;
 }
-/* line 111, ../sass/admin.scss */
+/* line 117, ../sass/admin.scss */
 .search-entry #search-entryi:focus + label i {
   font-size: 14px;
 }
-/* line 117, ../sass/admin.scss */
+/* line 123, ../sass/admin.scss */
 .search-entry label i {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 121, ../sass/admin.scss */
+/* line 127, ../sass/admin.scss */
 .search-entry label span {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 128, ../sass/admin.scss */
+/* line 134, ../sass/admin.scss */
 .card-list {
   overflow: auto;
 }
-/* line 130, ../sass/admin.scss */
+/* line 136, ../sass/admin.scss */
 .card-list .card-item {
   min-height: 30px;
   margin: 20px 3px;
   border-bottom: 1px solid gray;
 }
 
-/* line 137, ../sass/admin.scss */
+/* line 143, ../sass/admin.scss */
 form {
   margin: 50px 0;
 }
