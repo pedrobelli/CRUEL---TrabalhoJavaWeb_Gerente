@@ -1,10 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="atendentes.Atendente"%>
+<%@page import="usuarios.Usuario"%>
 <%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
 
 <%@ include file="/header.jsp"%>
-<% Atendente atendente = (Atendente) request.getAttribute("atendente"); %>
+<% 
+    Atendente atendente = (Atendente) request.getAttribute("atendente"); 
+    Usuario usuario = (Usuario) request.getAttribute("usuario"); 
+%>
 <main class="main">
 
     <div class="container row">
@@ -26,12 +30,12 @@
                     </div>
                     <div class="input-field">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf" value="${atendente.cpf}">
+                        <input type="text" name="cpf" class="federal-id" value="${atendente.cpf}">
                     </div>
                     
                     <div class="input-field">
                         <label for="cep">CEP</label>
-                        <input type="text" name="cep" value="${atendente.cep}">
+                        <input type="text" name="cep" class="zip-code" value="${atendente.cep}">
                     </div>
                     <div class="input-field">
                         <label for="rua">Endereço</label>
@@ -54,7 +58,7 @@
                             <option value="" disabled selected>Estados</option>
                             <%
                                 for(Estado estado : Estado.values()){ 
-                                    if (estado.getCod() == nutricionista.getEstado()) {
+                                    if (estado.getCod() == atendente.getEstado()) {
                                         out.println("<option value='" + estado.getCod() + "' selected>" + estado.getNome() + "</option>");
                                     } else {
                                         out.println("<option value='" + estado.getCod() + "'>" + estado.getNome() + "</option>");
@@ -66,15 +70,15 @@
                     </div>
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
-                        <input type="text" name="numeroTelefone" value="${atendente.numeroTelefone}">
+                        <input type="text" name="numeroTelefone" class="cellphones" value="${atendente.numeroTelefone}">
                     </div>
 					<div class="input-field">
                         <label for="numeroCelular">Celular</label>
-                        <input type="text" name="numeroCelular" value="${atendente.numeroCelular}">
+                        <input type="text" name="numeroCelular" class="cellphones" value="${atendente.numeroCelular}">
                     </div>                     
                     <div class="input-field">
                         <label for="email">Email</label>
-                        <input type="email" name="email">
+                        <input type="email" name="email" value="${usuario.email}">
                     </div>
                     <div class="input-field">
                         <label for="senha">Senha</label>
