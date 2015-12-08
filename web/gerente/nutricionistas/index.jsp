@@ -15,8 +15,8 @@
             <form>
                 <div class="input-field main-search" >
                     <input id="search-nutri" type="search" required>
-                    <label for="search-nutri"><i class="material-icons">search</i><span>Buscar Nutricionista</span></label>
-                    <button class="btn waves-effect waves-light blue right" type="submit" name="action">Buscar
+                    <label for="search-nutri"><span>Buscar Nutricionista</span></label>
+                    <button class="btn btn-main-search blue right" type="submit" name="action">Buscar
                         <i class="material-icons right">search</i>
                     </button>
                 </div>
@@ -33,7 +33,7 @@
                             htmlBody+="<form action='" + url + "nutricionistas' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + nutricionista.getId() + "'>";
                             htmlBody+="<input type='hidden' name='action' value='delete'>";
-                            htmlBody+="<button class='btn  blue' type='submit'> <i class='material-icons right'>delete</i></button></form>";
+                            htmlBody+="<button class='btn btn-delete  blue' type='submit'> <i class='material-icons right'>delete</i></button></form>";
                             htmlBody+="<a href='#'> <i class='material-icons right'>edit</i></a></li>";
 
                             out.println(htmlBody);
