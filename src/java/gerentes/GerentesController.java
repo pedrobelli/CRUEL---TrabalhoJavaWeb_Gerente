@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import usuarios.DaoUsuario;
@@ -79,6 +80,13 @@ public class GerentesController extends HttpServlet {
             this.setSession(HibernateUtil.getSessionFactory().openSession());
             this.setTransaction(this.getSession().beginTransaction());
             
+            HttpSession httpSession = request.getSession(false); 
+            Usuario usuarioSession = (Usuario) httpSession.getAttribute("usuarioSession");
+
+            if (usuarioSession == null) {
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/login");
+            }
+            
             String action = request.getParameter("action");
             
             if (action == null) {
@@ -113,8 +121,6 @@ public class GerentesController extends HttpServlet {
                 Usuario usuario = Usuario.processRequestForm(request);
                 this.createUsuario(usuario, gerente.getId());
                 
-                request.setAttribute("gerentes", this.all());
-                
                 this.getTransaction().commit();
                 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
@@ -133,7 +139,6 @@ public class GerentesController extends HttpServlet {
                 Gerente gerente = this.processRequestForm();
                 this.update(gerente);
                 
-                request.setAttribute("gerentes", this.all());
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
                 
             } else if (action.equals("delete")) {
@@ -143,15 +148,26 @@ public class GerentesController extends HttpServlet {
                 
                 this.delete(gerente);
                 
-                request.setAttribute("gerentes", this.all());
-                
                 this.getTransaction().commit();
                 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
             
             }
             
-        } finally {
+        } catch(Exception E) {
+            request.setAttribute("gerente", this.processRequestForError());
+            request.setAttribute("usuario", Usuario.processRequestForError(request));
+            
+            String action = request.getParameter("action");
+            
+            if (action != null && action.equals("create")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
+            } else if (action != null && action.equals("update")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
+            }
+        }finally {
             out.close();
         }
     }
@@ -271,18 +287,7 @@ public class GerentesController extends HttpServlet {
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);
-            request.setAttribute("gerente", this.processRequestForError());
-            request.setAttribute("usuario", Usuario.processRequestForError(request));
-            
-            String action = request.getParameter("action");
-            
-            if (action != null && action.equals("create")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
-            } else if (action != null && action.equals("update")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
-            }
+            throw new Exception();
         }   
     }
     

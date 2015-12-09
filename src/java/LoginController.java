@@ -5,10 +5,31 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import usuarios.Usuario;
 
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
+    
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    
+    public HttpServletRequest getRequest() {
+        return request;
+    }
 
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -22,9 +43,18 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
         try {
-            getServletContext().getRequestDispatcher("/gerente/login.jsp").forward(request, response);
+            this.setRequest(request);
+            this.setResponse(response);
+            
+            HttpSession session = request.getSession(false); 
+            Usuario usuarioSession = (Usuario) session.getAttribute("usuarioSession");
+            
+            if (usuarioSession == null) {
+                getServletContext().getRequestDispatcher("/gerente/login.jsp").forward(request, response);
+            } else {
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
+            }
 
         } finally {
             out.close();

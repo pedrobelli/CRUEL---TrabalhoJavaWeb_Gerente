@@ -1,6 +1,17 @@
+<%@page import="usuarios.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% String url = getServletContext().getContextPath() + "/"; %>
+<%    
+    HttpSession httpSession = request.getSession(false); 
+    Usuario usuarioSession = (Usuario) httpSession.getAttribute("usuarioSession");
+
+    boolean isLogin = false;
+    if (usuarioSession == null) {
+        isLogin = true;
+    }
+    
+    String url = getServletContext().getContextPath() + "/"; 
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -13,14 +24,21 @@
         <link href="<%=url%>assets/stylesheets/admin.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
-        <% String loginUrl = "<a href='" + getServletContext().getContextPath() + "/login'>Login</a>" ; %>
-        <% String relatoriosUrl = "<a class='brand-logo left' href='" + getServletContext().getContextPath() + "/relatorios'>Gerencia</a>" ; %>
+        
+        <% 
+            String loginUrl = new String();
+            if (isLogin) {
+                loginUrl = "";
+            } else {
+                loginUrl = "<li><a href='" + getServletContext().getContextPath() + "/logout'>Logout</a></li>" ; 
+            }
+        %>
         <header>
             <nav>
               <div class="nav-wrapper">
-                <%=relatoriosUrl%>
+                <p class='brand-logo left'>Gerencia</p>
                 <ul class="right">
-                  <li><%=loginUrl%></li>
+                  <%=loginUrl%>
                 </ul>
               </div>
             </nav>

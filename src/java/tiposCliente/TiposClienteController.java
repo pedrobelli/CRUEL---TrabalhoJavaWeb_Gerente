@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import usuarios.Usuario;
 
 @WebServlet(name = "TiposClienteController", urlPatterns = {"/tiposCliente"})
@@ -50,10 +51,17 @@ public class TiposClienteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();        
         try {
             this.setRequest(request);
             this.setResponse(response);
+            
+            HttpSession httpSession = request.getSession(false); 
+            Usuario usuarioSession = (Usuario) httpSession.getAttribute("usuarioSession");
+
+            if (usuarioSession == null) {
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/login");
+            }
             
             String action = request.getParameter("action");
             

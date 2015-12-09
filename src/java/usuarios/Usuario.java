@@ -7,9 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
-import nutricionistas.DaoNutricionista;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 public class Usuario implements Serializable {
     private String email;

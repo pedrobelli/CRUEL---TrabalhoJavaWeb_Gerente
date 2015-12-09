@@ -36,6 +36,21 @@ public class DaoUsuario {
         
         Usuario usuario = (Usuario) usuarios.get(0);
         return usuario;
+    }    
+    
+    public Object getByEmailESenha(Usuario usuario) {
+        Query query = this.session.createSQLQuery("SELECT * FROM usuarios WHERE email = :email AND senha = :senha").addEntity(Usuario.class);
+        query.setParameter("email", usuario.getEmail());
+        query.setParameter("senha", usuario.getSenha());
+        List usuarios = query.list();
+        
+        Usuario usuarioPersistido = new Usuario();
+        
+        if (usuarios.size() > 0) {
+            usuarioPersistido = (Usuario) usuarios.get(0);
+        }
+        
+        return usuarioPersistido;
     }   
     
     public Object create(Usuario usuario) {
