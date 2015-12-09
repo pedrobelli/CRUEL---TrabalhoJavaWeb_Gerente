@@ -152,20 +152,6 @@ public class NutricionistasController extends HttpServlet {
             
             }
             
-        } catch (Exception E) {            
-            request.setAttribute("nutricionista", this.processRequestForError());
-            request.setAttribute("usuario", Usuario.processRequestForError(request));
-            
-            String action = request.getParameter("action");
-            
-            if (action != null && action.equals("create")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
-            } else if (action != null && action.equals("update")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/nutricionistas/edit.jsp").forward(request, response);
-            }
-            
         } finally {
             out.close();
         }
@@ -290,7 +276,21 @@ public class NutricionistasController extends HttpServlet {
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);
-            throw new Exception();
+            request.setAttribute("nutricionista", this.processRequestForError());
+            request.setAttribute("usuario", Usuario.processRequestForError(request));
+            
+            String action = request.getParameter("action");
+            
+            if (action != null && action.equals("create")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/new.jsp").forward(request, response);
+            } else if (action != null && action.equals("update")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/nutricionistas/edit.jsp").forward(request, response);
+            }
+            
+            
+            
         }   
     }
     
