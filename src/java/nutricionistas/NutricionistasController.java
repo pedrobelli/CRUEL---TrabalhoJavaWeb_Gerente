@@ -144,6 +144,9 @@ public class NutricionistasController extends HttpServlet {
                 this.delete(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
             
             }

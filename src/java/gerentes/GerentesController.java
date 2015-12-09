@@ -144,6 +144,9 @@ public class GerentesController extends HttpServlet {
                 this.delete(gerente);
                 
                 request.setAttribute("gerentes", this.all());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
             
             }
@@ -191,7 +194,7 @@ public class GerentesController extends HttpServlet {
     }
     
     public void createUsuario(Usuario usuario, int idDono) throws SQLException {
-        usuario.setTipoUsuario(TipoUsuario.NUTRICIONISTA.getCod());
+        usuario.setTipoUsuario(TipoUsuario.GERENTE.getCod());
         usuario.setIdDono(idDono);
         Usuario.create(usuario, this.getSession());
         

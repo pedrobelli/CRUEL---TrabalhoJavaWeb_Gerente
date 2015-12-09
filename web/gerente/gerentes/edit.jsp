@@ -3,13 +3,13 @@
 <%@page import="usuarios.Usuario"%>
 <%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
-
 <%@ include file="/header.jsp"%>
 
 <% 
     Gerente gerente = (Gerente) request.getAttribute("gerente"); 
     Usuario usuario = (Usuario) request.getAttribute("usuario"); 
 %>
+
 <main class="main">
     <div class="container row">
         
@@ -22,7 +22,7 @@
                 <%@ include file="/errors.jsp"%>
                 <form class="cadast" action="<%=url%>gerentes" method="post">
                    <input type="hidden" name="action" value="update">
-                    <input type="hidden" name="id" value="${gerente.id}">
+                   <input type="hidden" name="id" value="${gerente.id}">
                       
                     <div class="input-field">
                         <label for="nome">Nome:</label>
@@ -79,11 +79,11 @@
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
 
-                        <input type="text" name="numeroTelefone" class ="cellphones" value="<%=gerente.getTelefone()%>">
+                        <input type="text" name="numeroTelefone" class ="cellphones" value="${gerente.numeroTelefone}">
                     </div>
                     <div class="input-field">
                         <label for="numeroCelular">Celular</label>
-                        <input type="text" name="numeroCelular" class ="cellphones" value="<%=gerente.getCelular()%>">
+                        <input type="text" name="numeroCelular" class ="cellphones" value="${gerente.numeroCelular}">
 
                     </div>
                      
@@ -109,5 +109,5 @@
         </section>
     </div>
 </main>
+       
 <%@ include file="/footer.jsp"%>
-
