@@ -117,7 +117,7 @@ public class GerentesController extends HttpServlet {
                 
                 this.getTransaction().commit();
                 
-                getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
                 
             } else if (action.equals("edit")) {
                 DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
@@ -134,7 +134,7 @@ public class GerentesController extends HttpServlet {
                 this.update(gerente);
                 
                 request.setAttribute("gerentes", this.all());
-                getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
                 
             } else if (action.equals("delete")) {
                 
@@ -147,7 +147,7 @@ public class GerentesController extends HttpServlet {
                 
                 this.getTransaction().commit();
                 
-                getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
             
             }
             

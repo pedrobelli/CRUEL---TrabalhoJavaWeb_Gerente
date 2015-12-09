@@ -85,7 +85,7 @@ public class TiposClienteController extends HttpServlet {
                 this.create(tipoCliente);
                 
                 request.setAttribute("tiposCliente", this.all());
-                getServletContext().getRequestDispatcher("/gerente/tiposCliente/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposCliente");
                 
             } else if (action.equals("edit")) {
                 DaoTipoCliente daoTipoCliente = new DaoTipoCliente();
@@ -102,7 +102,7 @@ public class TiposClienteController extends HttpServlet {
                 this.update(tipoCliente);
                 
                 request.setAttribute("tiposCliente", this.all());
-                getServletContext().getRequestDispatcher("/gerente/tiposCliente/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposCliente");
                 
             } else if (action.equals("delete")) {
                 
@@ -112,7 +112,7 @@ public class TiposClienteController extends HttpServlet {
                 this.delete(tipoCliente);
                 
                 request.setAttribute("tiposCliente", this.all());
-                getServletContext().getRequestDispatcher("/gerente/tiposCliente/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposCliente");
             
             }
             

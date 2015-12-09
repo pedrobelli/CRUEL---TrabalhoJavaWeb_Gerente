@@ -20,8 +20,7 @@
             <div class="container">
                 <h4>Editar Gerente</h4>
                 <%@ include file="/errors.jsp"%>
-                <form class="cadast" action="<%=url%>gerentes" method="post">
-                   <input type="hidden" name="action" value="update">
+                <form class="cadast" action="<%=url%>gerentes?action=update" method="post">
                    <input type="hidden" name="id" value="${gerente.id}">
                       
                     <div class="input-field">

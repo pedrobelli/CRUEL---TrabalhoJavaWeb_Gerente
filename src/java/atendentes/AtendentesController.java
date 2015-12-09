@@ -117,7 +117,7 @@ public class AtendentesController extends HttpServlet {
                 
                 this.getTransaction().commit();
                 
-                getServletContext().getRequestDispatcher("/gerente/atendentes/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/atendentes");
                 
             } else if (action.equals("edit")) {
                 DaoAtendente daoAtendente = new DaoAtendente().setDaoAtendente(this.getSession());
@@ -134,7 +134,7 @@ public class AtendentesController extends HttpServlet {
                 this.update(atendente);
                 
                 request.setAttribute("atendentes", this.all());
-                getServletContext().getRequestDispatcher("/gerente/atendentes/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/atendentes");
                 
             } else if (action.equals("delete")) {
                 
@@ -147,7 +147,7 @@ public class AtendentesController extends HttpServlet {
                 
                 this.getTransaction().commit();
                 
-                getServletContext().getRequestDispatcher("/gerente/atendentes/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/atendentes");
             
             }
             

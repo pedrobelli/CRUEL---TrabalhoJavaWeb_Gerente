@@ -31,9 +31,8 @@
                             String htmlBody ="<li class='main-item'>";
                             htmlBody+="<span>" + Atendente.getNome() + " - " + Atendente.getFormatedCpf()+ "</span>";
                             
-                            htmlBody+="<form class='list-form right' action='" + url + "atendentes' method='post'>";
+                            htmlBody+="<form class='list-form right' action='" + url + "atendentes?action=delete' method='post'>";
                             htmlBody+="<input type='hidden' name='id' value='" + Atendente.getId() + "'>";
-                            htmlBody+="<input type='hidden' name='action' value='delete'>";
                             htmlBody+="<button class='btn btn-delete  blue' type='submit'> <i class='material-icons'>delete</i></button></form>";
                             htmlBody+="</form>";
                             
