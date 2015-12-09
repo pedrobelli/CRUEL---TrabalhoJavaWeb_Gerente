@@ -85,13 +85,8 @@ public class UsuariosController extends HttpServlet {
                 this.login();
                 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
-            }
-
-            if (action.equals("index")) {
-                /*this.index();*/
-            }
-            if (action.equals("logoff")) {
-                /*this.logoff();*/
+            } else if (action.equals("logout")) {
+                this.logout();
             }
 
         } catch(Exception E) {
@@ -131,6 +126,12 @@ public class UsuariosController extends HttpServlet {
             request.setAttribute("mensagem", "Usuário ou senha inválidos!");
             throw new Exception();
         }
+    }
+    
+    public void logout() throws IOException{
+        this.getRequest().getSession().removeAttribute("usuarioSession");
+        this.getRequest().getSession().removeAttribute("nomeDonoSession");
+        this.getResponse().sendRedirect(getServletContext().getContextPath() + "/login");
     }
     
     public void validateLoginFields() throws IOException, Exception {

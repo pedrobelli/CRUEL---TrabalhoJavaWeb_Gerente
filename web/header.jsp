@@ -30,7 +30,7 @@
             if (isLogin) {
                 loginUrl = "";
             } else {
-                loginUrl = "<li><a href='" + getServletContext().getContextPath() + "/logout'>Logout</a></li>" ; 
+                loginUrl = "<li><a href='" + getServletContext().getContextPath() + "/usuarios?action=logout'>Logout</a></li>" ; 
             }
         %>
         <header>
