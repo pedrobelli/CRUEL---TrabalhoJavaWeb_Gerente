@@ -16,8 +16,7 @@
             <div class="container">
                 <h4>Editar Nutricionista</h4>
                 <%@ include file="/errors.jsp"%>
-                <form class="cadast" action="<%=url%>nutricionistas" method="post">
-                    <input type="hidden" name="action" value="update">
+                <form class="cadast" action="<%=url%>nutricionistas?action=update" method="post">
                     <input type="hidden" name="id" value="${nutricionista.id}">
                       
                     <div class="input-field">

@@ -20,8 +20,7 @@
             <div class="container">
                 <h4>Novo Nutricionista</h4>
                 <%@ include file="/errors.jsp"%>
-                <form class="cadast" action="<%=url%>nutricionistas" method="post">
-                   <input type="hidden" name="action" value="create">
+                <form class="cadast" action="<%=url%>nutricionistas?action=create" method="post">
                       
                     <div class="input-field">
                         <label for="nome">Nome:</label>

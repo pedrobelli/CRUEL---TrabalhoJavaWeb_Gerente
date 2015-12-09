@@ -117,7 +117,7 @@ public class NutricionistasController extends HttpServlet {
                 
                 this.getTransaction().commit();
                 
-                getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/nutricionistas");
                 
             } else if (action.equals("edit")) {
                 DaoNutricionista daoNutricionista = new DaoNutricionista().setDaoNutricionista(this.getSession(), this.getTransaction());
@@ -134,7 +134,7 @@ public class NutricionistasController extends HttpServlet {
                 this.update(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
-                getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/nutricionistas");
                 
             } else if (action.equals("delete")) {
                 
@@ -144,7 +144,10 @@ public class NutricionistasController extends HttpServlet {
                 this.delete(nutricionista);
                 
                 request.setAttribute("nutricionistas", this.all());
-                getServletContext().getRequestDispatcher("/gerente/nutricionistas/index.jsp").forward(request, response);
+                
+                this.getTransaction().commit();
+                
+                this.getResponse().sendRedirect(getServletContext().getContextPath() + "/nutricionistas");
             
             }
             
