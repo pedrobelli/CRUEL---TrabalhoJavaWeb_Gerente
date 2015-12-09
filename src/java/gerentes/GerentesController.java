@@ -217,11 +217,11 @@ public class GerentesController extends HttpServlet {
         List<String> errors = new ArrayList<>();
         HttpServletRequest request = this.getRequest();
                 
-        if (request.getParameter("nome").length() < 1) {
+        if (request.getParameter("nome").isEmpty()) {
             errors.add("O campo nome deve ser preenchido;");
         }
 
-        if (request.getParameter("cpf").length() < 1) {
+        if (request.getParameter("cpf").isEmpty()) {
             errors.add("O campo cpf deve ser preenchido;");
         } else {
             String cpf = request.getParameter("cpf");
@@ -235,12 +235,12 @@ public class GerentesController extends HttpServlet {
         }
 
         String cep = request.getParameter("cep");
-        if (cep.length() > 0 && cep.length() != 8) {
+        if (!cep.isEmpty() && cep.length() != 8) {
             errors.add("O campo cep deve conter 8 digitos;");
         }
 
         String numeroTelefone = request.getParameter("numeroTelefone");
-        if (numeroTelefone.length() > 0) {
+        if (!numeroTelefone.isEmpty()) {
             if (numeroTelefone.length() < 10) {
                 errors.add("O campo telefone deve conter no mínimo 10 digitos;");
             } else if (numeroTelefone.length() > 11) {
@@ -249,7 +249,7 @@ public class GerentesController extends HttpServlet {
         }
 
         String numeroCelular = request.getParameter("numeroCelular");
-        if (numeroCelular.length() > 0) {
+        if (!numeroCelular.isEmpty()) {
             if (numeroCelular.length() < 10) {
                 errors.add("O campo celular deve conter no mínimo 10 digitos;");
             } else if (numeroCelular.length() > 11) {
@@ -264,7 +264,7 @@ public class GerentesController extends HttpServlet {
         HttpServletRequest request = this.getRequest();
         
         String email = request.getParameter("email");
-        if (email.length() < 1) {
+        if (email.isEmpty()) {
             errors.add("O campo email deve ser preenchido;");
         } else {
         DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());;
@@ -276,7 +276,7 @@ public class GerentesController extends HttpServlet {
         
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
-        if (senha.length() < 1 || confirmSenha.length() < 1) {
+        if (senha.isEmpty() || confirmSenha.isEmpty()) {
             errors.add("Os campo senha e confirma senha devem ser preenchidos;");
         } else {
             if (!senha.equals(confirmSenha)) {
@@ -304,7 +304,7 @@ public class GerentesController extends HttpServlet {
         //Endereço
         geren.setCep(request.getParameter("cep"));
         
-        if (request.getParameter("estado") != null && request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado") != null && !request.getParameter("estado").isEmpty()) {
             geren.setEstado(Integer.parseInt(request.getParameter("estado")));
         }
         
@@ -312,19 +312,19 @@ public class GerentesController extends HttpServlet {
         geren.setBairro(request.getParameter("bairro"));
         geren.setRua(request.getParameter("rua"));
         
-        if (request.getParameter("numeroEndereco").length() > 0) {
+        if (!request.getParameter("numeroEndereco").isEmpty()) {
             geren.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEndereco")));
         }
         
         geren.setComplemento(request.getParameter("complemento"));
         //Telefone
-        if (request.getParameter("numeroTelefone").length() > 0) {
+        if (!request.getParameter("numeroTelefone").isEmpty()) {
             String telefone = request.getParameter("numeroTelefone");
             geren.setCodigoAreaTelefone(Integer.parseInt(telefone.substring(0, 2)));
             geren.setNumeroTelefone(telefone.substring(2));
         }
         
-        if (request.getParameter("numeroCelular").length() > 0) {
+        if (!request.getParameter("numeroCelular").isEmpty()) {
             String celular = request.getParameter("numeroCelular");
             geren.setCodigoAreaCelular(Integer.parseInt(celular.substring(0, 2)));
             geren.setNumeroCelular(celular.substring(2));
@@ -346,7 +346,7 @@ public class GerentesController extends HttpServlet {
         //Endereço
         geren.setCep(request.getParameter("cep"));
         
-        if (request.getParameter("estado") != null && request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado") != null && !request.getParameter("estado").isEmpty()) {
             geren.setEstado(Integer.parseInt(request.getParameter("estado")));
         }
         
@@ -354,7 +354,7 @@ public class GerentesController extends HttpServlet {
         geren.setBairro(request.getParameter("bairro"));
         geren.setRua(request.getParameter("rua"));
         
-        if (request.getParameter("numeroEndereco").length() > 0) {
+        if (!request.getParameter("numeroEndereco").isEmpty()) {
             geren.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEndereco")));
         }
         

@@ -26,7 +26,7 @@
                     </div>
                     <div class="input-field">
                         <label for="valorRefeicao">Valor Refeição</label>
-                        <input type="number" name="valorRefeicao" value="${tipoCliente.valorRefeicao}">
+                        <input type="text" name="valorRefeicao" class="currency" value="${tipoCliente.valorRefeicao}">
 
                     </div>
                     

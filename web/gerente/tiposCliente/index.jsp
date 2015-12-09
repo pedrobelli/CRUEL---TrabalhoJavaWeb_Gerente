@@ -24,7 +24,7 @@
             <ul class="main-list">
                 <%        
                     List<TipoCliente> tiposCliente = (List) request.getAttribute("tiposCliente");
-                    if(tiposCliente.size()>=0){
+                    if(tiposCliente.size()>0){
                         int index;
                         for(index=0; index < tiposCliente.size(); index++){                   
                             TipoCliente tipoCliente = tiposCliente.get(index);
@@ -45,7 +45,7 @@
                         }
                     }
                     else{
-                        out.println("Nao existem Atividades cadastrados.");
+                        out.println("Nao existem Tipos de Cliente cadastrados.");
                     }
                 %>
             </ul>
