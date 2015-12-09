@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gerentes;
 
 import java.io.IOException;
@@ -17,17 +12,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import usuarios.DaoUsuario;
 import usuarios.Usuario;
+import utils.HibernateUtil;
+import utils.TipoUsuarioEnum.TipoUsuario;
 
-/**
- *
- * @author pedro
- */
 @WebServlet(name = "GerentesController", urlPatterns = {"/gerentes"})
 public class GerentesController extends HttpServlet {
     
-    HttpServletRequest request;
-    HttpServletResponse response;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private Session session;
+    private Transaction transaction;
     
     public HttpServletRequest getRequest() {
         return request;
@@ -44,6 +42,22 @@ public class GerentesController extends HttpServlet {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
+    
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,6 +67,7 @@ public class GerentesController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
@@ -61,6 +76,8 @@ public class GerentesController extends HttpServlet {
         try {
             this.setRequest(request);
             this.setResponse(response);
+            this.setSession(HibernateUtil.getSessionFactory().openSession());
+            this.setTransaction(this.getSession().beginTransaction());
             
             String action = request.getParameter("action");
             
@@ -86,18 +103,24 @@ public class GerentesController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
                 
             } else if (action.equals("create")) {
-                List<String> errors = this.validate(request);
+                List<String> errors = this.validate();
                 
-                this.validateCreate(request, errors);
+                this.validateCreate(errors);
                 
-                Gerente gerente = this.processRequestForm(request);
+                Gerente gerente = this.processRequestForm();
                 this.create(gerente);
                 
+                Usuario usuario = Usuario.processRequestForm(request);
+                this.createUsuario(usuario, gerente.getId());
+                
                 request.setAttribute("gerentes", this.all());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
                 
             } else if (action.equals("edit")) {
-                DaoGerente daoGerente = new DaoGerente();
+                DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
                 
                 request.setAttribute("gerente", daoGerente.get(id));
@@ -107,7 +130,7 @@ public class GerentesController extends HttpServlet {
                 
                 /*this.validate(request);*/
                 
-                Gerente gerente = this.processRequestForm(request);
+                Gerente gerente = this.processRequestForm();
                 this.update(gerente);
                 
                 request.setAttribute("gerentes", this.all());
@@ -121,19 +144,24 @@ public class GerentesController extends HttpServlet {
                 this.delete(gerente);
                 
                 request.setAttribute("gerentes", this.all());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
             
             }
             
-        } catch (Exception E) {
-            request.setAttribute("gerente", this.processRequestForError(request));
+        } catch (Exception E) {            
+            request.setAttribute("gerente", this.processRequestForError());
             request.setAttribute("usuario", Usuario.processRequestForError(request));
             
             String action = request.getParameter("action");
             
             if (action != null && action.equals("create")) {
+                this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
             } else if (action != null && action.equals("update")) {
+                this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
             }
             
@@ -145,8 +173,8 @@ public class GerentesController extends HttpServlet {
     public List<Gerente> all() throws SQLException {
         List<Gerente> gerentes = new ArrayList<Gerente>();
         
-        DaoGerente daoGerente = new DaoGerente();
-        gerentes = (List) daoGerente.all();
+        DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
+        gerentes = (List) daoGerente.all(this.getSession());
         
         return gerentes;
     }
@@ -154,30 +182,39 @@ public class GerentesController extends HttpServlet {
     public List<Gerente> search(String searchQuery) throws SQLException {
         List<Gerente> gerentes = new ArrayList<Gerente>();
         
-        DaoGerente daoGerente = new DaoGerente();
+        DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
         gerentes = (List) daoGerente.search(searchQuery);
         
         return gerentes;
     }
     
     public void create(Gerente gerente) throws SQLException {
-        DaoGerente daoGerente = new DaoGerente();
+        DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
         daoGerente.create(gerente);
     }
     
+    public void createUsuario(Usuario usuario, int idDono) throws SQLException {
+        usuario.setTipoUsuario(TipoUsuario.GERENTE.getCod());
+        usuario.setIdDono(idDono);
+        Usuario.create(usuario, this.getSession());
+        
+    }
+    
     public void update(Gerente gerente) throws SQLException {
-        DaoGerente daoGerente = new DaoGerente();
+        DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
         daoGerente.update(gerente);
     }
     
     public void delete(Gerente gerente) throws SQLException {
-        DaoGerente daoGerente = new DaoGerente();
+        DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
+        Usuario.delete(gerente.getId(), this.getSession());
         daoGerente.delete(gerente);
     }
     
-    private List<String> validate(HttpServletRequest request) throws Exception {
+    private List<String> validate() {
         List<String> errors = new ArrayList<>();
-        
+        HttpServletRequest request = this.getRequest();
+                
         if (request.getParameter("nome").length() < 1) {
             errors.add("O campo nome deve ser preenchido;");
         }
@@ -186,12 +223,15 @@ public class GerentesController extends HttpServlet {
             errors.add("O campo cpf deve ser preenchido;");
         } else {
             String cpf = request.getParameter("cpf");
-            if (cpf.length() != 11) {
+            DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
+        
+            if (daoGerente.checkExistance(cpf)) {
+                errors.add("Já existe um gerente cadastrado com este cpf;");
+            } else if (cpf.length() != 11) {
                 errors.add("O campo cpf deve conter 11 digitos;");
             }
         }
 
-        
         String cep = request.getParameter("cep");
         if (cep.length() > 0 && cep.length() != 8) {
             errors.add("O campo cep deve conter 8 digitos;");
@@ -218,14 +258,22 @@ public class GerentesController extends HttpServlet {
         return errors; 
     }
     
-    private void validateCreate(HttpServletRequest request, List<String> errors) throws Exception {
-        if (request.getParameter("email").length() < 1) {
+    private void validateCreate(List<String> errors) throws Exception {
+        HttpServletRequest request = this.getRequest();
+        
+        String email = request.getParameter("email");
+        if (email.length() < 1) {
             errors.add("O campo email deve ser preenchido;");
+        } else {
+        DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());;
+            
+            if (daoUsuario.checkExistance(email)) {
+                errors.add("Já existe um usuário cadastrado com este email;");
+            }
         }
         
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
-        
         if (senha.length() < 1 || confirmSenha.length() < 1) {
             errors.add("Os campo senha e confirma senha devem ser preenchidos;");
         } else {
@@ -241,8 +289,9 @@ public class GerentesController extends HttpServlet {
         }   
     }
     
-    private Gerente processRequestForm(HttpServletRequest request) {
+    private Gerente processRequestForm() {
         Gerente geren = new Gerente();
+        HttpServletRequest request = this.getRequest();
         
         if (request.getParameter("id") != null) {
             geren.setId(Integer.parseInt(request.getParameter("id")));
@@ -282,8 +331,9 @@ public class GerentesController extends HttpServlet {
         return geren;
     }
 
-    private Gerente processRequestForError(HttpServletRequest request) {
+    private Gerente processRequestForError() {
         Gerente geren = new Gerente();
+        HttpServletRequest request = this.getRequest();
         
         if (request.getParameter("id") != null) {
             geren.setId(Integer.parseInt(request.getParameter("id")));
@@ -313,7 +363,7 @@ public class GerentesController extends HttpServlet {
 
         return geren;
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

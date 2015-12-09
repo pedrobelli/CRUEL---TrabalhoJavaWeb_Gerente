@@ -3,27 +3,26 @@
 <%@page import="usuarios.Usuario"%>
 <%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
-
 <%@ include file="/header.jsp"%>
+
 <% 
     Atendente atendente = (Atendente) request.getAttribute("atendente"); 
     Usuario usuario = (Usuario) request.getAttribute("usuario"); 
 %>
+
 <main class="main">
-
     <div class="container row">
-
-       <%@ include file="/gerente/actionbutton.jsp"%>
-
+        
+        <%@ include file="/gerente/actionbutton.jsp"%>
 
         <h3 class="center">Atendentes</h3>
         <section>
             <div class="container">
                 <h4>Novo Atendente</h4>
                 <%@ include file="/errors.jsp"%>
-                
-              <form class="cadast" action="<%=url%>atendentes" method="post">
-                  <input type="hidden" name="action" value="create">
+                <form class="cadast" action="<%=url%>atendentes" method="post">
+                   <input type="hidden" name="action" value="create">
+                      
                     <div class="input-field">
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" value="${atendente.nome}">
@@ -31,11 +30,13 @@
                     <div class="input-field">
                         <label for="cpf">CPF:</label>
                         <input type="text" name="cpf" class="federal-id" value="${atendente.cpf}">
+
                     </div>
-                    
+                                       
                     <div class="input-field">
                         <label for="cep">CEP</label>
                         <input type="text" name="cep" class="zip-code" value="${atendente.cep}">
+
                     </div>
                     <div class="input-field">
                         <label for="rua">Endereço</label>
@@ -46,13 +47,18 @@
                         <input type="number" name="numeroEndereco" value="${atendente.numeroEndereco}">
                     </div>
                     <div class="input-field">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" name="complemento" value="${atendente.complemento}">
+                    </div>
+                    <div class="input-field">
                         <label for="bairro">Bairro</label>
                         <input type="text" name="bairro" value="${atendente.bairro}">
                     </div>
                     <div class="input-field">
                         <label for="cidade">Cidade</label>
                         <input type="text" name="cidade" value="${atendente.cidade}">
-                    </div>
+                     </div>
+                     
                     <div class="input-field">
                         <select name="estado" class="browser-default" value="">
                             <option value="" disabled selected>Estados</option>
@@ -68,14 +74,18 @@
                             %>
                         </select>
                     </div>
+                   
                     <div class="input-field">
                         <label for="numeroTelefone">Telefone</label>
-                        <input type="text" name="numeroTelefone" class="cellphones" value="${atendente.numeroTelefone}">
+
+                        <input type="text" name="numeroTelefone" class ="cellphones" value="${atendente.numeroTelefone}">
                     </div>
-					<div class="input-field">
+                    <div class="input-field">
                         <label for="numeroCelular">Celular</label>
-                        <input type="text" name="numeroCelular" class="cellphones" value="${atendente.numeroCelular}">
-                    </div>                     
+                        <input type="text" name="numeroCelular" class ="cellphones" value="${atendente.numeroCelular}">
+
+                    </div>
+                     
                     <div class="input-field">
                         <label for="email">Email</label>
                         <input type="email" name="email" value="${usuario.email}">
@@ -85,10 +95,10 @@
                         <input type="password" name="senha">
                     </div>
                     <div class="input-field">
-                        <label for="confirmSenha">Confirma Senha</label>
+                        <label for="confirmSenha">Confirmar Senha</label>
                         <input type="password" name="confirmSenha">
                     </div>
-                    
+
                     <button class="btn blue right" type="submit" name="action">Ok
                         <i class="material-icons right">send</i>
                     </button>
@@ -97,6 +107,6 @@
             </div>
         </section>
     </div>
-  </main>
+</main>
+       
 <%@ include file="/footer.jsp"%>
-

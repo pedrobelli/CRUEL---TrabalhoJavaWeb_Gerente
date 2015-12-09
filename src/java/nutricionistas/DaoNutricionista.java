@@ -8,11 +8,9 @@ import org.hibernate.Transaction;
 
 public class DaoNutricionista {
     private Session session;
-    private Transaction transaction;
     
-    public DaoNutricionista setDaoNutricionista(Session session, Transaction transaction) {
+    public DaoNutricionista setDaoNutricionista(Session session) {
         this.setSession(session);
-        this.setTransaction(transaction);
         
         return this;
     }
@@ -23,14 +21,6 @@ public class DaoNutricionista {
 
     public void setSession(Session session) {
         this.session = session;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
     }
 
     

@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tiposCliente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Float.parseFloat;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import usuarios.Usuario;
 
-/**
- *
- * @author Layla
- */
 @WebServlet(name = "TiposClienteController", urlPatterns = {"/tiposCliente"})
 public class TiposClienteController extends HttpServlet {
-
+    
     HttpServletRequest request;
     HttpServletResponse response;
     
@@ -44,7 +36,7 @@ public class TiposClienteController extends HttpServlet {
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,6 +45,7 @@ public class TiposClienteController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
@@ -81,14 +74,12 @@ public class TiposClienteController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/index.jsp").forward(request, response);
                 
             } else if (action.equals("new")) {
-               
+                
                 request.setAttribute("tipoCliente", new TipoCliente());
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/new.jsp").forward(request, response);
                 
             } else if (action.equals("create")) {
-                List<String> errors = this.validate(request);
-                
-                this.validateCreate(request, errors);
+                this.validate(request);
                 
                 TipoCliente tipoCliente = this.processRequestForm(request);
                 this.create(tipoCliente);
@@ -141,6 +132,7 @@ public class TiposClienteController extends HttpServlet {
             out.close();
         }
     }
+    
     public List<TipoCliente> all() throws SQLException {
         List<TipoCliente> tiposCliente = new ArrayList<TipoCliente>();
         
@@ -174,27 +166,46 @@ public class TiposClienteController extends HttpServlet {
         daoTipoCliente.delete(tipoCliente);
     }
     
-    private List<String> validate(HttpServletRequest request) throws Exception {
+    private void validate(HttpServletRequest request) throws Exception {
         List<String> errors = new ArrayList<>();
         
         if (request.getParameter("nome").length() < 1) {
             errors.add("O campo nome deve ser preenchido;");
         }
-        
-        return errors; 
-    }
-    
-    private void validateCreate(HttpServletRequest request, List<String> errors) throws Exception {
-        if (request.getParameter("name").length() < 1) {
-            errors.add("O campo Nome deve ser preenchido;");
+
+       if (request.getParameter("valorRefeicao").length() < 1) {
+            errors.add("O campo nome deve ser preenchido;");
         }
-        
-        if (!errors.isEmpty()) {
+       
+       if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);
             throw new Exception();
-        }   
+        } 
     }
+    
+    // private void validateCreate(HttpServletRequest request, List<String> errors) throws Exception {
+    //     if (request.getParameter("email").length() < 1) {
+    //         errors.add("O campo email deve ser preenchido;");
+    //     }
+        
+    //     String senha = request.getParameter("senha");
+    //     String confirmSenha = request.getParameter("confirmSenha");
+        
+    //     if (senha.length() < 1 || confirmSenha.length() < 1) {
+    //         errors.add("Os campo senha e confirma senha devem ser preenchidos;");
+    //     } else {
+    //         if (!senha.equals(confirmSenha)) {
+    //             errors.add("Os campo senha e confirma senha estão diferentes;");
+    //         }
+    //     }
+        
+    //     if (!errors.isEmpty()) {
+    //         errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
+    //         request.setAttribute("errors", errors);
+    //         throw new Exception();
+    //     }   
+    // }
     
     private TipoCliente processRequestForm(HttpServletRequest request) {
         TipoCliente tipo = new TipoCliente();
@@ -203,8 +214,9 @@ public class TiposClienteController extends HttpServlet {
             tipo.setId(Integer.parseInt(request.getParameter("id")));
         }
 
-        tipo.setNome(request.getParameter("nome"));          
-
+        tipo.setNome(request.getParameter("nome"));
+        tipo.setValorRefeicao(parseFloat(request.getParameter("valorRefeicao")));
+        
         return tipo;
     }
 
@@ -216,10 +228,11 @@ public class TiposClienteController extends HttpServlet {
         }
 
         tipo.setNome(request.getParameter("nome"));
+        tipo.setValorRefeicao(parseFloat(request.getParameter("valorRefeicao")));
         
         return tipo;
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -260,7 +273,6 @@ public class TiposClienteController extends HttpServlet {
             Logger.getLogger(TiposClienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     /**
      * Returns a short description of the servlet.
