@@ -151,20 +151,6 @@ public class GerentesController extends HttpServlet {
             
             }
             
-        } catch (Exception E) {            
-            request.setAttribute("gerente", this.processRequestForError());
-            request.setAttribute("usuario", Usuario.processRequestForError(request));
-            
-            String action = request.getParameter("action");
-            
-            if (action != null && action.equals("create")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
-            } else if (action != null && action.equals("update")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
-            }
-            
         } finally {
             out.close();
         }
@@ -285,7 +271,18 @@ public class GerentesController extends HttpServlet {
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);
-            throw new Exception();
+            request.setAttribute("gerente", this.processRequestForError());
+            request.setAttribute("usuario", Usuario.processRequestForError(request));
+            
+            String action = request.getParameter("action");
+            
+            if (action != null && action.equals("create")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
+            } else if (action != null && action.equals("update")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
+            }
         }   
     }
     

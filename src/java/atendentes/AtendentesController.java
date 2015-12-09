@@ -151,20 +151,6 @@ public class AtendentesController extends HttpServlet {
             
             }
             
-        } catch (Exception E) {            
-            request.setAttribute("atendente", this.processRequestForError());
-            request.setAttribute("usuario", Usuario.processRequestForError(request));
-            
-            String action = request.getParameter("action");
-            
-            if (action != null && action.equals("create")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/atendentes/new.jsp").forward(request, response);
-            } else if (action != null && action.equals("update")) {
-                this.getTransaction().rollback();
-                getServletContext().getRequestDispatcher("/gerente/atendentes/edit.jsp").forward(request, response);
-            }
-            
         } finally {
             out.close();
         }
@@ -215,11 +201,11 @@ public class AtendentesController extends HttpServlet {
         List<String> errors = new ArrayList<>();
         HttpServletRequest request = this.getRequest();
                 
-        if (request.getParameter("nome").length() < 1) {
+        if (request.getParameter("nome").isEmpty()) {
             errors.add("O campo nome deve ser preenchido;");
         }
 
-        if (request.getParameter("cpf").length() < 1) {
+        if (request.getParameter("cpf").isEmpty()) {
             errors.add("O campo cpf deve ser preenchido;");
         } else {
             String cpf = request.getParameter("cpf");
@@ -233,12 +219,12 @@ public class AtendentesController extends HttpServlet {
         }
 
         String cep = request.getParameter("cep");
-        if (cep.length() > 0 && cep.length() != 8) {
+        if (!cep.isEmpty() && cep.length() != 8) {
             errors.add("O campo cep deve conter 8 digitos;");
         }
 
         String numeroTelefone = request.getParameter("numeroTelefone");
-        if (numeroTelefone.length() > 0) {
+        if (!numeroTelefone.isEmpty()) {
             if (numeroTelefone.length() < 10) {
                 errors.add("O campo telefone deve conter no mínimo 10 digitos;");
             } else if (numeroTelefone.length() > 11) {
@@ -247,7 +233,7 @@ public class AtendentesController extends HttpServlet {
         }
 
         String numeroCelular = request.getParameter("numeroCelular");
-        if (numeroCelular.length() > 0) {
+        if (!numeroCelular.isEmpty()) {
             if (numeroCelular.length() < 10) {
                 errors.add("O campo celular deve conter no mínimo 10 digitos;");
             } else if (numeroCelular.length() > 11) {
@@ -262,7 +248,7 @@ public class AtendentesController extends HttpServlet {
         HttpServletRequest request = this.getRequest();
         
         String email = request.getParameter("email");
-        if (email.length() < 1) {
+        if (email.isEmpty()) {
             errors.add("O campo email deve ser preenchido;");
         } else {
         DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());;
@@ -274,7 +260,7 @@ public class AtendentesController extends HttpServlet {
         
         String senha = request.getParameter("senha");
         String confirmSenha = request.getParameter("confirmSenha");
-        if (senha.length() < 1 || confirmSenha.length() < 1) {
+        if (senha.isEmpty() || confirmSenha.isEmpty()) {
             errors.add("Os campo senha e confirma senha devem ser preenchidos;");
         } else {
             if (!senha.equals(confirmSenha)) {
@@ -285,7 +271,18 @@ public class AtendentesController extends HttpServlet {
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);
-            throw new Exception();
+            request.setAttribute("atendente", this.processRequestForError());
+            request.setAttribute("usuario", Usuario.processRequestForError(request));
+            
+            String action = request.getParameter("action");
+            
+            if (action != null && action.equals("create")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/atendentes/new.jsp").forward(request, response);
+            } else if (action != null && action.equals("update")) {
+                this.getTransaction().rollback();
+                getServletContext().getRequestDispatcher("/gerente/atendentes/edit.jsp").forward(request, response);
+            }
         }   
     }
     
@@ -302,7 +299,7 @@ public class AtendentesController extends HttpServlet {
         //Endereço
         atend.setCep(request.getParameter("cep"));
         
-        if (request.getParameter("estado") != null && request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado") != null && !request.getParameter("estado").isEmpty()) {
             atend.setEstado(Integer.parseInt(request.getParameter("estado")));
         }
         
@@ -310,19 +307,19 @@ public class AtendentesController extends HttpServlet {
         atend.setBairro(request.getParameter("bairro"));
         atend.setRua(request.getParameter("rua"));
         
-        if (request.getParameter("numeroEndereco").length() > 0) {
+        if (!request.getParameter("numeroEndereco").isEmpty()) {
             atend.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEndereco")));
         }
         
         atend.setComplemento(request.getParameter("complemento"));
         //Telefone
-        if (request.getParameter("numeroTelefone").length() > 0) {
+        if (!request.getParameter("numeroTelefone").isEmpty()) {
             String telefone = request.getParameter("numeroTelefone");
             atend.setCodigoAreaTelefone(Integer.parseInt(telefone.substring(0, 2)));
             atend.setNumeroTelefone(telefone.substring(2));
         }
         
-        if (request.getParameter("numeroCelular").length() > 0) {
+        if (!request.getParameter("numeroCelular").isEmpty()) {
             String celular = request.getParameter("numeroCelular");
             atend.setCodigoAreaCelular(Integer.parseInt(celular.substring(0, 2)));
             atend.setNumeroCelular(celular.substring(2));
@@ -344,7 +341,7 @@ public class AtendentesController extends HttpServlet {
         //Endereço
         atend.setCep(request.getParameter("cep"));
         
-        if (request.getParameter("estado") != null && request.getParameter("estado").length() > 0) {
+        if (request.getParameter("estado") != null && !request.getParameter("estado").isEmpty()) {
             atend.setEstado(Integer.parseInt(request.getParameter("estado")));
         }
         
@@ -352,7 +349,7 @@ public class AtendentesController extends HttpServlet {
         atend.setBairro(request.getParameter("bairro"));
         atend.setRua(request.getParameter("rua"));
         
-        if (request.getParameter("numeroEndereco").length() > 0) {
+        if (!request.getParameter("numeroEndereco").isEmpty()) {
             atend.setNumeroEndereco(Integer.parseInt(request.getParameter("numeroEndereco")));
         }
         
