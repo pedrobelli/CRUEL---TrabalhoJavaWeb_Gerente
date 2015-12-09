@@ -12,18 +12,7 @@ $(document).ready(function(){
     $('.cellphones').inputmask('(99) [9]9999-9999', {greedy : false, removeMaskOnSubmit: true});
     $('.agency').inputmask('9999');
     $('.account').inputmask('99999[99999]');
-
-
-    Inputmask.extendAliases({
-      "currency": {
-        prefix: "R$ ",
-        placeHolder: '0,0',
-        autoUnmask: true,
-        rightAlign: false,
-        numericInput: true
-      }
-    });
-    $('.currency').inputmask('R$ 999.999.999,99', { numericInput: true, rightAlign: true });
+    $('.currency').inputmask('99.99', { numericInput: true });
 
     $('.email').inputmask({
       mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
