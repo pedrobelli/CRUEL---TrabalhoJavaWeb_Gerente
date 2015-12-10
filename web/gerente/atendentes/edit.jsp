@@ -83,19 +83,22 @@
                     <div class="input-field">
                         <label for="numeroCelular">Celular</label>
                         <input type="text" name="numeroCelular" class ="cellphones" value="${atendente.numeroCelular}">
-
                     </div>
                      
                     <div class="input-field">
-                        <label for="email">Email</label>
+                        <label for="email">Email:</label>
                         <input type="email" name="email" value="${usuario.email}">
                     </div>
                     <div class="input-field">
-                        <label for="senha">Senha</label>
+                        <label for="senha">Senha Antiga</label>
+                        <input type="password" name="senhaAntiga">
+                    </div>
+                    <div class="input-field">
+                        <label for="senha">Nova Senha</label>
                         <input type="password" name="senha">
                     </div>
                     <div class="input-field">
-                        <label for="confirmSenha">Confirmar Senha</label>
+                        <label for="confirmSenha">Confirmar Nova Senha</label>
                         <input type="password" name="confirmSenha">
                     </div>
 

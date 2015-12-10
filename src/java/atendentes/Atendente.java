@@ -119,12 +119,13 @@ public class Atendente implements Serializable {
     public String getNumeroTelefone() {
         return numeroTelefone;
     }
-    
+
     public String getTelefone() {
-        String telefone = numeroTelefone;        
-        if (telefone != null && telefone.length() > 7) {
-            String codigoArea = String.valueOf(this.codigoAreaTelefone);
-            return codigoArea + telefone;
+        String telefone = this.numeroTelefone;  
+        int codigoArea = this.codigoAreaTelefone;
+        if (telefone != null && telefone.length() > 7 && codigoArea > 0) {
+            String codigoAreaString = String.valueOf(codigoArea);
+            return codigoAreaString + telefone;
         }
         return telefone;
     }
@@ -144,12 +145,13 @@ public class Atendente implements Serializable {
     public String getNumeroCelular() {
         return numeroCelular;
     }
-    
+
     public String getCelular() {
-        String celular = numeroCelular;        
-        if (celular != null && celular.length() > 7) {
-            String codigoArea = String.valueOf(this.codigoAreaCelular);
-            return codigoArea + celular;
+        String celular = this.numeroCelular;
+        int codigoArea = this.codigoAreaCelular;
+        if (celular != null && celular.length() > 7 && codigoArea > 0) {
+            String codigoAreaString = String.valueOf(codigoArea);
+            return codigoAreaString + celular;
         }
         return celular;
     }

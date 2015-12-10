@@ -1,10 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="nutricionistas.Nutricionista"%>
+<%@page import="usuarios.Usuario"%>
 <%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>  
 
-<% Nutricionista nutricionista = (Nutricionista) request.getAttribute("nutricionista"); %>
+<% 
+    Nutricionista nutricionista = (Nutricionista) request.getAttribute("nutricionista");
+    Usuario usuario = (Usuario) request.getAttribute("usuario");
+%>
 
 <main class="main">
     <div class="container row">

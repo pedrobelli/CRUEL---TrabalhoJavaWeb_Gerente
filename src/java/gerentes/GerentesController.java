@@ -92,7 +92,6 @@ public class GerentesController extends HttpServlet {
             String action = request.getParameter("action");
             
             if (action == null) {
-                
                 request.setAttribute("gerentes", this.all());
                 
                 this.getTransaction().commit();
@@ -113,7 +112,6 @@ public class GerentesController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
                 
             } else if (action.equals("new")) {
-                
                 request.setAttribute("gerente", new Gerente());
                 
                 this.getTransaction().commit();
@@ -274,6 +272,7 @@ public class GerentesController extends HttpServlet {
                     errors.add("O campo cpf deve conter 11 digitos;");
                 }
             }
+            
         }
 
         String cep = request.getParameter("cep");

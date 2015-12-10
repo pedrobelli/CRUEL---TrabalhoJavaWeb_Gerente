@@ -2,6 +2,8 @@ package atendentes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,8 +92,10 @@ public class AtendentesController extends HttpServlet {
             String action = request.getParameter("action");
             
             if (action == null) {
-                
                 request.setAttribute("atendentes", this.all()); 
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/atendentes/index.jsp").forward(request, response);
           
             } else if (action.equals("search")) {
@@ -102,17 +106,20 @@ public class AtendentesController extends HttpServlet {
                 } else {
                     request.setAttribute("atendentes", this.all());
                 }
+                
+                this.getTransaction().commit();
                  
                 getServletContext().getRequestDispatcher("/gerente/atendentes/index.jsp").forward(request, response);
                 
             } else if (action.equals("new")) {
-                
                 request.setAttribute("atendente", new Atendente());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/atendentes/new.jsp").forward(request, response);
                 
             } else if (action.equals("create")) {
                 List<String> errors = this.validate();
-                
                 this.validateCreate(errors);
                 
                 Atendente atendente = this.processRequestForm();
@@ -129,20 +136,34 @@ public class AtendentesController extends HttpServlet {
                 DaoAtendente daoAtendente = new DaoAtendente().setDaoAtendente(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
                 
+                DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());
+                
                 request.setAttribute("atendente", daoAtendente.get(id));
+                request.setAttribute("usuario", daoUsuario.getByOwnerEOwnerType(id, TipoUsuario.ATENDENTE.getCod()));
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/atendentes/edit.jsp").forward(request, response);
                 
             } else if (action.equals("update")) {
+                DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());
+                int idDono = Integer.parseInt(request.getParameter("id"));
+                Usuario usuario = (Usuario) daoUsuario.getByOwnerEOwnerType(idDono, TipoUsuario.ATENDENTE.getCod());
                 
-                /*this.validate(request);*/
+                List<String> errors = this.validate();
+                this.validateUpdate(errors, usuario);
                 
                 Atendente atendente = this.processRequestForm();
                 this.update(atendente);
                 
+                usuario = Usuario.processRequestFormUpdate(usuario, request);
+                this.updateUsuario(usuario, atendente.getId());
+                
+                this.getTransaction().commit();
+                
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/atendentes");
                 
             } else if (action.equals("delete")) {
-                
                 Atendente atendente = new Atendente();
                 atendente.setId(Integer.parseInt(request.getParameter("id")));
                 
@@ -207,6 +228,12 @@ public class AtendentesController extends HttpServlet {
         daoAtendente.update(atendente);
     }
     
+    public void updateUsuario(Usuario usuario, int idDono) throws SQLException {
+        usuario.setTipoUsuario(TipoUsuario.ATENDENTE.getCod());
+        usuario.setIdDono(idDono);
+        Usuario.update(usuario, this.getSession());
+    }
+    
     public void delete(Atendente atendente) throws SQLException {
         DaoAtendente daoAtendente = new DaoAtendente().setDaoAtendente(this.getSession());
         Usuario.delete(atendente.getId(), TipoUsuario.ATENDENTE.getCod(), this.getSession());
@@ -227,10 +254,24 @@ public class AtendentesController extends HttpServlet {
             String cpf = request.getParameter("cpf");
             DaoAtendente daoAtendente = new DaoAtendente().setDaoAtendente(this.getSession());
         
-            if (daoAtendente.checkExistance(cpf)) {
-                errors.add("Já existe um atendente cadastrado com este cpf;");
-            } else if (cpf.length() != 11) {
-                errors.add("O campo cpf deve conter 11 digitos;");
+            String action = request.getParameter("action");
+            
+            if (action.equals("create")) {
+                if (daoAtendente.checkExistance(cpf)) {
+                    errors.add("Já existe um nutricionista cadastrado com este cpf;");
+                } else if (cpf.length() != 11) {
+                    errors.add("O campo cpf deve conter 11 digitos;");
+                }
+            } else {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Atendente atend = daoAtendente.get(id);
+                
+                if(!atend.getCpf().equals(cpf)) {
+                    errors.add("Já existe um nutricionista cadastrado com este cpf;");
+                } else if (cpf.length() != 11) {
+                    errors.add("O campo cpf deve conter 11 digitos;");
+                }
+                
             }
         }
 
@@ -284,6 +325,42 @@ public class AtendentesController extends HttpServlet {
             }
         }
         
+        if (!errors.isEmpty()) {
+            errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
+            request.setAttribute("errors", errors);
+            throw new Exception();
+        }   
+    }
+    
+    private void validateUpdate(List<String> errors, Usuario usuario) throws Exception {
+        HttpServletRequest request = this.getRequest();
+
+        String email = request.getParameter("email");
+        if (email.isEmpty()) {
+            errors.add("O campo email deve ser preenchido;");
+        }
+
+        String senhaAntiga = request.getParameter("senhaAntiga");
+        String senha = request.getParameter("senha");
+        String confirmSenha = request.getParameter("confirmSenha");
+        
+        if (!senhaAntiga.isEmpty()) {       
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(senhaAntiga.getBytes("UTF-8"));
+
+            senhaAntiga = new BigInteger(1,messageDigest.digest()).toString(16);
+            
+            if (!usuario.getSenha().equals(senhaAntiga)) {
+                errors.add("A senha informada não esta correta;");
+            } else if (senha.isEmpty() || confirmSenha.isEmpty()) {
+                errors.add("Os campo nova senha e confirma nova senha devem ser preenchidos;");
+            } else {
+                if (!senha.equals(confirmSenha)) {
+                    errors.add("Os campo nova senha e confirma nova senha estão diferentes;");
+                }
+            }   
+        }
+
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);

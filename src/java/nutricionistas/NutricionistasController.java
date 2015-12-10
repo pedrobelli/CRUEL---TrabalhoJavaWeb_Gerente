@@ -164,7 +164,6 @@ public class NutricionistasController extends HttpServlet {
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/nutricionistas");
 
             } else if (action.equals("delete")) {
-
                 Nutricionista nutricionista = new Nutricionista();
                 nutricionista.setId(Integer.parseInt(request.getParameter("id")));
 
