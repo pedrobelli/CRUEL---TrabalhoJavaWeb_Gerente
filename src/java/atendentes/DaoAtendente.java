@@ -61,7 +61,7 @@ public class DaoAtendente {
     public Object update(Atendente atendente) {
         Atendente atendentePersistido = this.get(atendente.getId());
         atendentePersistido = atendente;
-        this.session.update(atendentePersistido);
+        this.session.merge(atendentePersistido);
         
         return atendentePersistido;
     }

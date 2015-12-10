@@ -69,7 +69,7 @@ public class DaoTipoCliente {
     public Object update(TipoCliente tipoCliente) {
         TipoCliente tipoClientePersistido = this.get(tipoCliente.getId());
         tipoClientePersistido = tipoCliente;
-        this.session.update(tipoClientePersistido);
+        this.session.merge(tipoClientePersistido);
         
         return tipoClientePersistido;
     }

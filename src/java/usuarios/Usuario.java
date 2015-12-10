@@ -47,7 +47,7 @@ public class Usuario implements Serializable {
         this.idDono = idDono;
     }
     
-    public static Usuario processRequestForm(HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public static Usuario processRequestFormCreate(HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         Usuario usu = new Usuario();
         String senha = request.getParameter("senha");
         
@@ -56,6 +56,22 @@ public class Usuario implements Serializable {
         
         usu.setEmail(request.getParameter("email"));
         usu.setSenha(new BigInteger(1,messageDigest.digest()).toString(16));
+
+        return usu;
+    }
+    
+    public static Usuario processRequestFormUpdate(Usuario usu, HttpServletRequest request) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        usu.setEmail(request.getParameter("email"));
+        
+        String senhaAntiga = request.getParameter("senhaAntiga");
+        if (!senhaAntiga.isEmpty()) {       
+            String senha = request.getParameter("senha");
+        
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(senha.getBytes("UTF-8"));
+        
+            usu.setSenha(new BigInteger(1,messageDigest.digest()).toString(16));
+        }
 
         return usu;
     }
@@ -78,9 +94,9 @@ public class Usuario implements Serializable {
         daoUsuario.update(usuario);
     }
     
-    public static void delete(int idDono, Session session) throws SQLException {
+    public static void delete(int idDono, int tipoUsuario, Session session) throws SQLException {
         DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(session);
-        Usuario usuario = (Usuario) daoUsuario.getByOwner(idDono);
+        Usuario usuario = (Usuario) daoUsuario.getByOwnerEOwnerType(idDono, tipoUsuario);
         daoUsuario.delete(usuario);
     }
     

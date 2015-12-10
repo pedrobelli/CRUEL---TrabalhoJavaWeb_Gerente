@@ -118,7 +118,7 @@ public class GerentesController extends HttpServlet {
                 Gerente gerente = this.processRequestForm();
                 this.create(gerente);
                 
-                Usuario usuario = Usuario.processRequestForm(request);
+                Usuario usuario = Usuario.processRequestFormCreate(request);
                 this.createUsuario(usuario, gerente.getId());
                 
                 this.getTransaction().commit();
@@ -209,7 +209,7 @@ public class GerentesController extends HttpServlet {
     
     public void delete(Gerente gerente) throws SQLException {
         DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
-        Usuario.delete(gerente.getId(), this.getSession());
+        Usuario.delete(gerente.getId(), TipoUsuario.GERENTE.getCod(), this.getSession());
         daoGerente.delete(gerente);
     }
     

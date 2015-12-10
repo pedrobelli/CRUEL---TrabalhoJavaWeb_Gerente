@@ -30,8 +30,10 @@ public class DaoUsuario {
         return usuarios.size() > 0;
     }   
     
-    public Object getByOwner(int idDono) {
-        Query query = this.session.createSQLQuery("SELECT * FROM usuarios WHERE id_dono = :id_dono").addEntity(Usuario.class).setParameter("id_dono", idDono);
+    public Object getByOwnerEOwnerType(int idDono, int tipoUsuario) {
+        Query query = this.session.createSQLQuery("SELECT * FROM usuarios WHERE id_dono = :id_dono AND tipo_usuario = :tipo_usuario").addEntity(Usuario.class);
+        query.setParameter("id_dono", idDono);
+        query.setParameter("tipo_usuario", tipoUsuario);
         List usuarios = query.list();
         
         Usuario usuario = (Usuario) usuarios.get(0);
@@ -62,7 +64,7 @@ public class DaoUsuario {
     public Object update(Usuario usuario) {
         Usuario usuarioPersistido = (Usuario) this.session.load(Usuario.class, usuario.getEmail());
         usuarioPersistido = usuario;
-        this.session.update(usuarioPersistido);
+        this.session.merge(usuarioPersistido);
         
         return usuarioPersistido;
     }

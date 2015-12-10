@@ -118,7 +118,7 @@ public class AtendentesController extends HttpServlet {
                 Atendente atendente = this.processRequestForm();
                 this.create(atendente);
                 
-                Usuario usuario = Usuario.processRequestForm(request);
+                Usuario usuario = Usuario.processRequestFormCreate(request);
                 this.createUsuario(usuario, atendente.getId());
                 
                 this.getTransaction().commit();
@@ -209,7 +209,7 @@ public class AtendentesController extends HttpServlet {
     
     public void delete(Atendente atendente) throws SQLException {
         DaoAtendente daoAtendente = new DaoAtendente().setDaoAtendente(this.getSession());
-        Usuario.delete(atendente.getId(), this.getSession());
+        Usuario.delete(atendente.getId(), TipoUsuario.ATENDENTE.getCod(), this.getSession());
         daoAtendente.delete(atendente);
     }
     

@@ -62,7 +62,7 @@ public class DaoNutricionista {
     public Object update(Nutricionista nutricionista) {
         Nutricionista nutricionistaPersistido = this.get(nutricionista.getId());
         nutricionistaPersistido = nutricionista;
-        this.session.update(nutricionistaPersistido);
+        this.session.merge(nutricionistaPersistido);
         
         return nutricionistaPersistido;
     }

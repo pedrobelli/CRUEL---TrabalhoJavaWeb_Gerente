@@ -61,7 +61,7 @@ public class DaoGerente {
     public Object update(Gerente gerente) {
         Gerente gerentePersistido = this.get(gerente.getId());
         gerentePersistido = gerente;
-        this.session.update(gerentePersistido);
+        this.session.merge(gerentePersistido);
         
         return gerentePersistido;
     }
