@@ -1,6 +1,7 @@
 package tiposCliente;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class TipoCliente implements Serializable {
     private int    id;
@@ -25,6 +26,11 @@ public class TipoCliente implements Serializable {
 
     public double getValorRefeicao() {
         return valorRefeicao;
+    }
+
+    public String getValorRefeicaoWithTwoDecimals() {
+        String valorRefeicaoString = String.format("%.2f", this.valorRefeicao); 
+        return valorRefeicaoString;
     }
 
     public void setValorRefeicao(double valorRefeicao) {

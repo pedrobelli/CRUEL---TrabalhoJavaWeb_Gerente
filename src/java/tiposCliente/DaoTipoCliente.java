@@ -37,9 +37,12 @@ public class DaoTipoCliente {
         Query query = this.session.createSQLQuery("SELECT * FROM tipos_cliente WHERE id = :id").addEntity(TipoCliente.class).setParameter("id", id);
         
         List tiposCliente = query.list();
-        
+        System.out.println("===== GET 1 =====");
+        System.out.println(tiposCliente);
+        System.out.println(id);
         TipoCliente tipoCliente = (TipoCliente) tiposCliente.get(0);
-
+        
+        System.out.println("===== GET 1 =====");
         return tipoCliente;
     }   
     
@@ -67,9 +70,13 @@ public class DaoTipoCliente {
     }
 
     public Object update(TipoCliente tipoCliente) {
+        System.out.println("===== DAO 1 =====");
         TipoCliente tipoClientePersistido = this.get(tipoCliente.getId());
+        System.out.println("===== DAO 2 =====");
         tipoClientePersistido = tipoCliente;
+        System.out.println("===== DAO 3 =====");
         this.session.merge(tipoClientePersistido);
+        System.out.println("===== DAO 4 =====");
         
         return tipoClientePersistido;
     }

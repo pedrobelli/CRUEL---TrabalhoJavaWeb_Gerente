@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="tiposCliente.TipoCliente"%>
-<%@page import="utils.EstadoEnum.Estado"%>
 <!DOCTYPE html>
 <%@ include file="/header.jsp"%>
 
@@ -26,7 +25,7 @@
                     </div>
                     <div class="input-field">
                         <label for="valorRefeicao">Valor Refeição</label>
-                        <input type="text" name="valorRefeicao" class="currency" value="${tipoCliente.valorRefeicao}">
+                        <input type="text" name="valorRefeicao" class="currency" value="<%=tipoCliente.getValorRefeicaoWithTwoDecimals()%>">
 
                     </div>
                     

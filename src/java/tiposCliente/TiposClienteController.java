@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import usuarios.DaoUsuario;
 import usuarios.Usuario;
 import utils.HibernateUtil;
-import utils.TipoUsuarioEnum.TipoUsuario;
     
 @WebServlet(name = "TiposClienteController", urlPatterns = {"/tiposCliente"})
 public class TiposClienteController extends HttpServlet {
@@ -91,8 +89,10 @@ public class TiposClienteController extends HttpServlet {
             String action = request.getParameter("action");
                 
             if (action == null) {
-
                 request.setAttribute("tiposCliente", this.all()); 
+
+                this.getTransaction().commit();
+
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/index.jsp").forward(request, response);
 
             } else if (action.equals("search")) {
@@ -104,11 +104,15 @@ public class TiposClienteController extends HttpServlet {
                     request.setAttribute("tiposCliente", this.all());
                 }
 
+                this.getTransaction().commit();
+
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/index.jsp").forward(request, response);
 
             } else if (action.equals("new")) {
-
                 request.setAttribute("tipoCliente", new TipoCliente());
+
+                this.getTransaction().commit();
+
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/new.jsp").forward(request, response);
 
             } else if (action.equals("create")) {                    
@@ -116,8 +120,6 @@ public class TiposClienteController extends HttpServlet {
 
                 TipoCliente tipoCliente = this.processRequestForm();
                 this.create(tipoCliente);
-
-                request.setAttribute("tiposCliente", this.all());
 
                 this.getTransaction().commit();
 
@@ -128,20 +130,24 @@ public class TiposClienteController extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
 
                 request.setAttribute("tipoCliente", daoTipoCliente.get(id));
+
+                this.getTransaction().commit();
+
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/edit.jsp").forward(request, response);
 
             } else if (action.equals("update")) {
-
-                /*this.validate(request);*/
+                this.validate();
 
                 TipoCliente tipoCliente = this.processRequestForm();
+                System.out.println("===== CONTROLLER 1 =====");
                 this.update(tipoCliente);
+                System.out.println("===== CONTROLLER 2 =====");
 
-                request.setAttribute("tiposCliente", this.all());
+                this.getTransaction().commit();
+
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposCliente");
 
             } else if (action.equals("delete")) {
-
                 TipoCliente tipoCliente = new TipoCliente();
                 tipoCliente.setId(Integer.parseInt(request.getParameter("id")));
 
@@ -195,8 +201,11 @@ public class TiposClienteController extends HttpServlet {
     }
 
     public void update(TipoCliente tipoCliente) throws SQLException {
+        System.out.println("===== UPDATE 1 =====");
         DaoTipoCliente daoTipoCliente = new DaoTipoCliente().setDaoTipoCliente(this.getSession());
+        System.out.println("===== UPDATE 2 =====");
         daoTipoCliente.update(tipoCliente);
+        System.out.println("===== UPDATE 3 =====");
     }
 
     public void delete(TipoCliente tipoCliente) throws SQLException {
