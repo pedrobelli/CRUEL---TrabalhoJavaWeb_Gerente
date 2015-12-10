@@ -2,6 +2,8 @@ package gerentes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,10 @@ public class GerentesController extends HttpServlet {
             
             if (action == null) {
                 
-                request.setAttribute("gerentes", this.all()); 
+                request.setAttribute("gerentes", this.all());
+                
+                this.getTransaction().commit();
+                 
                 getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
           
             } else if (action.equals("search")) {
@@ -102,17 +107,21 @@ public class GerentesController extends HttpServlet {
                 } else {
                     request.setAttribute("gerentes", this.all());
                 }
+                
+                this.getTransaction().commit();
                  
                 getServletContext().getRequestDispatcher("/gerente/gerentes/index.jsp").forward(request, response);
                 
             } else if (action.equals("new")) {
                 
                 request.setAttribute("gerente", new Gerente());
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/gerentes/new.jsp").forward(request, response);
                 
             } else if (action.equals("create")) {
                 List<String> errors = this.validate();
-                
                 this.validateCreate(errors);
                 
                 Gerente gerente = this.processRequestForm();
@@ -129,20 +138,34 @@ public class GerentesController extends HttpServlet {
                 DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
                 int id = Integer.parseInt(request.getParameter("id"));
                 
+                DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());
+                
                 request.setAttribute("gerente", daoGerente.get(id));
+                request.setAttribute("usuario", daoUsuario.getByOwnerEOwnerType(id, TipoUsuario.GERENTE.getCod()));
+                
+                this.getTransaction().commit();
+                
                 getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
                 
             } else if (action.equals("update")) {
+                DaoUsuario daoUsuario = new DaoUsuario().setDaoUsuario(this.getSession());
+                int idDono = Integer.parseInt(request.getParameter("id"));
+                Usuario usuario = (Usuario) daoUsuario.getByOwnerEOwnerType(idDono, TipoUsuario.GERENTE.getCod());
                 
-                /*this.validate(request);*/
+                List<String> errors = this.validate();
+                this.validateUpdate(errors, usuario);
                 
                 Gerente gerente = this.processRequestForm();
-                this.update(gerente);
+                this.update(gerente);                
+                
+                usuario = Usuario.processRequestFormUpdate(usuario, request);
+                this.updateUsuario(usuario, gerente.getId());
+                
+                this.getTransaction().commit();
                 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/gerentes");
                 
             } else if (action.equals("delete")) {
-                
                 Gerente gerente = new Gerente();
                 gerente.setId(Integer.parseInt(request.getParameter("id")));
                 
@@ -207,6 +230,12 @@ public class GerentesController extends HttpServlet {
         daoGerente.update(gerente);
     }
     
+    public void updateUsuario(Usuario usuario, int idDono) throws SQLException {
+        usuario.setTipoUsuario(TipoUsuario.GERENTE.getCod());
+        usuario.setIdDono(idDono);
+        Usuario.update(usuario, this.getSession());
+    }
+    
     public void delete(Gerente gerente) throws SQLException {
         DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
         Usuario.delete(gerente.getId(), TipoUsuario.GERENTE.getCod(), this.getSession());
@@ -227,10 +256,23 @@ public class GerentesController extends HttpServlet {
             String cpf = request.getParameter("cpf");
             DaoGerente daoGerente = new DaoGerente().setDaoGerente(this.getSession());
         
-            if (daoGerente.checkExistance(cpf)) {
-                errors.add("Já existe um gerente cadastrado com este cpf;");
-            } else if (cpf.length() != 11) {
-                errors.add("O campo cpf deve conter 11 digitos;");
+            String action = request.getParameter("action");
+            
+            if (action.equals("create")) {
+                if (daoGerente.checkExistance(cpf)) {
+                    errors.add("Já existe um nutricionista cadastrado com este cpf;");
+                } else if (cpf.length() != 11) {
+                    errors.add("O campo cpf deve conter 11 digitos;");
+                }
+            } else {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Gerente geren = daoGerente.get(id);
+                
+                if(!geren.getCpf().equals(cpf)) {
+                    errors.add("Já existe um nutricionista cadastrado com este cpf;");
+                } else if (cpf.length() != 11) {
+                    errors.add("O campo cpf deve conter 11 digitos;");
+                }
             }
         }
 
@@ -284,6 +326,42 @@ public class GerentesController extends HttpServlet {
             }
         }
         
+        if (!errors.isEmpty()) {
+            errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
+            request.setAttribute("errors", errors);
+            throw new Exception();
+        }   
+    }
+    
+    private void validateUpdate(List<String> errors, Usuario usuario) throws Exception {
+        HttpServletRequest request = this.getRequest();
+
+        String email = request.getParameter("email");
+        if (email.isEmpty()) {
+            errors.add("O campo email deve ser preenchido;");
+        }
+
+        String senhaAntiga = request.getParameter("senhaAntiga");
+        String senha = request.getParameter("senha");
+        String confirmSenha = request.getParameter("confirmSenha");
+        
+        if (!senhaAntiga.isEmpty()) {       
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(senhaAntiga.getBytes("UTF-8"));
+
+            senhaAntiga = new BigInteger(1,messageDigest.digest()).toString(16);
+            
+            if (!usuario.getSenha().equals(senhaAntiga)) {
+                errors.add("A senha informada não esta correta;");
+            } else if (senha.isEmpty() || confirmSenha.isEmpty()) {
+                errors.add("Os campo nova senha e confirma nova senha devem ser preenchidos;");
+            } else {
+                if (!senha.equals(confirmSenha)) {
+                    errors.add("Os campo nova senha e confirma nova senha estão diferentes;");
+                }
+            }   
+        }
+
         if (!errors.isEmpty()) {
             errors.add("A operação não pôde ser concluída por causa dos seguintes erros:");
             request.setAttribute("errors", errors);

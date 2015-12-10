@@ -233,7 +233,6 @@ public class NutricionistasController extends HttpServlet {
         usuario.setTipoUsuario(TipoUsuario.NUTRICIONISTA.getCod());
         usuario.setIdDono(idDono);
         Usuario.update(usuario, this.getSession());
-
     }
 
     public void delete(Nutricionista nutricionista) throws SQLException {

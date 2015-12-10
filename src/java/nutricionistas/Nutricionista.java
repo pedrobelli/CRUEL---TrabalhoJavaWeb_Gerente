@@ -130,10 +130,11 @@ public class Nutricionista implements Serializable {
     }
 
     public String getTelefone() {
-        String telefone = numeroTelefone;        
-        if (telefone != null && telefone.length() > 7) {
-            String codigoArea = String.valueOf(this.codigoAreaTelefone);
-            return codigoArea + telefone;
+        String telefone = this.numeroTelefone;  
+        int codigoArea = this.codigoAreaTelefone;
+        if (telefone != null && telefone.length() > 7 && codigoArea > 0) {
+            String codigoAreaString = String.valueOf(codigoArea);
+            return codigoAreaString + telefone;
         }
         return telefone;
     }
@@ -156,9 +157,10 @@ public class Nutricionista implements Serializable {
 
     public String getCelular() {
         String celular = this.numeroCelular;
-        if (celular != null && celular.length() > 7) {
-            String codigoArea = String.valueOf(this.codigoAreaCelular);
-            return codigoArea + celular;
+        int codigoArea = this.codigoAreaCelular;
+        if (celular != null && celular.length() > 7 && codigoArea > 0) {
+            String codigoAreaString = String.valueOf(codigoArea);
+            return codigoAreaString + celular;
         }
         return celular;
     }
