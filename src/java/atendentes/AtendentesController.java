@@ -176,6 +176,7 @@ public class AtendentesController extends HttpServlet {
             }
             
         } catch(Exception E) {
+            E.printStackTrace();
             request.setAttribute("atendente", this.processRequestForError());
             request.setAttribute("usuario", Usuario.processRequestForError(request));
             

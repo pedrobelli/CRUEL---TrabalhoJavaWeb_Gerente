@@ -139,10 +139,8 @@ public class TiposClienteController extends HttpServlet {
                 this.validate();
 
                 TipoCliente tipoCliente = this.processRequestForm();
-                System.out.println("===== CONTROLLER 1 =====");
                 this.update(tipoCliente);
-                System.out.println("===== CONTROLLER 2 =====");
-
+                
                 this.getTransaction().commit();
 
                 this.getResponse().sendRedirect(getServletContext().getContextPath() + "/tiposCliente");
@@ -160,6 +158,7 @@ public class TiposClienteController extends HttpServlet {
             }
 
         } catch(Exception E) {
+            E.printStackTrace();
             request.setAttribute("tipoCliente", this.processRequestForError());
             request.setAttribute("usuario", Usuario.processRequestForError(request));
 
@@ -201,11 +200,8 @@ public class TiposClienteController extends HttpServlet {
     }
 
     public void update(TipoCliente tipoCliente) throws SQLException {
-        System.out.println("===== UPDATE 1 =====");
         DaoTipoCliente daoTipoCliente = new DaoTipoCliente().setDaoTipoCliente(this.getSession());
-        System.out.println("===== UPDATE 2 =====");
         daoTipoCliente.update(tipoCliente);
-        System.out.println("===== UPDATE 3 =====");
     }
 
     public void delete(TipoCliente tipoCliente) throws SQLException {

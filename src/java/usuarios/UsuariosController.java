@@ -90,6 +90,7 @@ public class UsuariosController extends HttpServlet {
             }
 
         } catch(Exception E) {
+            E.printStackTrace();
             String action = request.getParameter("action");
 
             if (action.equals("login")) {

@@ -176,6 +176,7 @@ public class GerentesController extends HttpServlet {
             }
             
         } catch(Exception E) {
+            E.printStackTrace();
             request.setAttribute("gerente", this.processRequestForError());
             request.setAttribute("usuario", Usuario.processRequestForError(request));
             

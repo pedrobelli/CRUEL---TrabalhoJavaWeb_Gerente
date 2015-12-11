@@ -3,8 +3,6 @@ package usuarios;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import utils.HibernateUtil;
 
 public class DaoUsuario {   
     private Session session;
