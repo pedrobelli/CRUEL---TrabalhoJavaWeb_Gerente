@@ -175,6 +175,7 @@ public class NutricionistasController extends HttpServlet {
 
             }
         } catch(Exception E) {
+            E.printStackTrace();
             request.setAttribute("nutricionista", this.processRequestForError());
             request.setAttribute("usuario", Usuario.processRequestForError(request));
 

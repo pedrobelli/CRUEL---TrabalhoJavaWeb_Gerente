@@ -2,9 +2,7 @@ package atendentes;
 
 import java.util.List;
 import org.hibernate.Query;
-import utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 public class DaoAtendente {
     private Session session;

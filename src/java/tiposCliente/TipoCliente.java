@@ -1,7 +1,6 @@
 package tiposCliente;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 
 public class TipoCliente implements Serializable {
     private int    id;
