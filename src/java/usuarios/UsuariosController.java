@@ -97,7 +97,7 @@ public class UsuariosController extends HttpServlet {
                 getServletContext().getRequestDispatcher("/gerente/login.jsp").forward(request, response);
             }
             
-        }finally {
+        } finally {
             out.close();
         }
     }

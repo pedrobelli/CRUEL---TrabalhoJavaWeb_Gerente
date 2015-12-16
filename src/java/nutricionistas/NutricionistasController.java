@@ -188,9 +188,8 @@ public class NutricionistasController extends HttpServlet {
                 this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/nutricionistas/edit.jsp").forward(request, response);
             }
-        }finally {
-            out.close();    
-
+        } finally {
+            out.close();
         }
     }
 
