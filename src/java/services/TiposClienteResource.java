@@ -60,7 +60,9 @@ public class TiposClienteResource {
         DaoTipoCliente daoTipoCliente = new DaoTipoCliente().setDaoTipoCliente(this.getSession());
         tiposCliente = (List) daoTipoCliente.all(this.getSession());
 
+        System.out.println(tiposCliente);
         return tiposCliente;
+        
     }
 
     /**
