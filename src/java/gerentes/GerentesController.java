@@ -189,7 +189,7 @@ public class GerentesController extends HttpServlet {
                 this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/gerentes/edit.jsp").forward(request, response);
             }
-        }finally {
+        } finally {
             out.close();
         }
     }

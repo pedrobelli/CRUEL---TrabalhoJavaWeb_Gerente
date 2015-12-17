@@ -189,7 +189,7 @@ public class AtendentesController extends HttpServlet {
                 this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/atendentes/edit.jsp").forward(request, response);
             }
-        }finally {
+        } finally {
             out.close();
         }
     }

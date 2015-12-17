@@ -7,7 +7,7 @@
 <main class="main">
     <div class="container row">
 
-        <%@ include file="/gerente/actionbutton.jsp"%>
+    <%@ include file="/gerente/actionbutton.jsp"%>
 
     <h3 class="center">Nutricionistas</h3>
     <section>
@@ -43,9 +43,8 @@
 
                             out.println(htmlBody);
                         }
-                    }
-                    else{
-                        out.println("Nenhum nutricionista foi encontrado.<br>");
+                    } else{
+                        out.println("Nenhum Nutricionista foi encontrado.<br>");
                     }
                 %>
             </ul>

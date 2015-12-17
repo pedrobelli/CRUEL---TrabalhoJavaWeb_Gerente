@@ -171,7 +171,7 @@ public class TiposClienteController extends HttpServlet {
                 this.getTransaction().rollback();
                 getServletContext().getRequestDispatcher("/gerente/tiposCliente/edit.jsp").forward(request, response);
             }
-        }finally {
+        } finally {
             out.close();
         }
     }
